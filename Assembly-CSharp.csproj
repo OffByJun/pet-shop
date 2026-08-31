@@ -47,6 +47,18 @@
     <Analyzer Include="D:\unityEditor\6000.4.2f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\001_Scripts\Core\Entity\GameEntity.cs" />
+    <Compile Include="Assets\001_Scripts\Core\GameBehaviour.cs" />
+    <Compile Include="Assets\001_Scripts\Core\World\IWorldSystem.cs" />
+    <Compile Include="Assets\001_Scripts\Core\World\WorldContext.cs" />
+    <Compile Include="Assets\001_Scripts\Data\Customers\CustomerBase.cs" />
+    <Compile Include="Assets\001_Scripts\Data\Items\ItemBase.cs" />
+    <Compile Include="Assets\001_Scripts\Data\Pets\PetBase.cs" />
+    <Compile Include="Assets\001_Scripts\Managers\AudioManager.cs" />
+    <Compile Include="Assets\001_Scripts\Managers\EnityManager.cs" />
+    <Compile Include="Assets\001_Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\001_Scripts\Managers\SaveManager.cs" />
+    <Compile Include="Assets\001_Scripts\Managers\WorldManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <None Include="Library\PackageCache\com.unity.ai.navigation@734c2c4c5591\ValidationExceptions.json" />
     <None Include="Library\PackageCache\com.unity.modules.subsystems\package.json" />
