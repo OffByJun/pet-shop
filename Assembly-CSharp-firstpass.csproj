@@ -974,9 +974,17 @@
       <Project>{341185b5-4215-0369-189b-7e12840691e6}</Project>
       <Name>Unity.VisualScripting.Flow.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.csproj">
+      <Project>{017ba967-e15e-5c14-3f82-9959febf369e}</Project>
+      <Name>UniTask.TextMeshPro</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VisualStudio.Editor.csproj">
       <Project>{8bf9e7bf-ec54-dca4-79b0-bbb46f829b19}</Project>
       <Name>Unity.VisualStudio.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.DOTween.csproj">
+      <Project>{732bf02c-37d6-aabe-2fad-dbf62b2029ca}</Project>
+      <Name>UniTask.DOTween</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.SurfaceCache.Runtime.csproj">
       <Project>{6002b135-c92b-aaf9-f2bf-c08918ad56c6}</Project>
@@ -1050,6 +1058,10 @@
       <Project>{148a01ab-277b-4e06-d168-1d14371f4848}</Project>
       <Name>Unity.RenderPipelines.Universal.Config.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.Linq.csproj">
+      <Project>{3eb33d88-6e57-0f9e-a839-dc0d5b8e166b}</Project>
+      <Name>UniTask.Linq</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared.csproj">
       <Project>{d1ac34d2-7e95-8473-e07c-237dabe9e3a0}</Project>
       <Name>Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared</Name>
@@ -1061,6 +1073,10 @@
     <ProjectReference Include="Unity.Collections.Editor.csproj">
       <Project>{336d281c-3923-15ee-0524-85ed34817f22}</Project>
       <Name>Unity.Collections.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.csproj">
+      <Project>{035e57ba-5314-4f49-bdb6-73cedfe71ba9}</Project>
+      <Name>UniTask.Addressables</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
       <Project>{38404d18-1385-97fc-63e5-7f1263e2b189}</Project>
@@ -1074,9 +1090,17 @@
       <Project>{ff7620c1-532a-1a9f-5e24-02d94c97c631}</Project>
       <Name>Unity.InputSystem</Name>
     </ProjectReference>
+    <ProjectReference Include="MessagePipe.csproj">
+      <Project>{a670bc31-d83f-c847-7266-5e834d8c1686}</Project>
+      <Name>MessagePipe</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{a99db278-3bcd-ab2f-cf3f-2003032e68ca}</Project>
       <Name>UnityEditor.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.csproj">
+      <Project>{e11a7bc6-6790-e0e1-e4d4-8f7f3f97a53c}</Project>
+      <Name>UniTask</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

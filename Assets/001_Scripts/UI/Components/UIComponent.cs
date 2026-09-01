@@ -15,6 +15,7 @@ namespace _001_Scripts.UI.Components
         [SerializeField] private bool includeChildren = true;
         [SerializeField] private UIVisibilityState initialState = UIVisibilityState.Hidden;
         [SerializeField] private UIAnimationPreset animationPreset;
+        [SerializeField] private string serviceId;
 
         private readonly List<IUIAnimator> animators = new List<IUIAnimator>();
         private readonly List<IUIAction> actions = new List<IUIAction>();
@@ -27,6 +28,8 @@ namespace _001_Scripts.UI.Components
         public bool IsTransitioning => State == UIVisibilityState.Showing || State == UIVisibilityState.Hiding;
 
         public UIAnimationPreset AnimationPreset => animationPreset;
+
+        public string ServiceId => string.IsNullOrWhiteSpace(serviceId) ? gameObject.name : serviceId;
 
         protected virtual void Awake()
         {

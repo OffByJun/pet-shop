@@ -2,7 +2,7 @@
 
 namespace _001_Scripts.Managers
 {
-    public class EnityManager : GameBehaviour
+    public sealed class EnityManager : SinManagerBase<EnityManager>
     {
         
     }

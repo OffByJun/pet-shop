@@ -392,8 +392,8 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\Views\PendingChanges\PendingMergeLinks\MergeLinksListView.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\UVCSMenuItem.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\Views\BranchExplorer\Options\BranchExplorerOptionsWindow.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\CodeEditor\Document\DocumentChangeEventArgs.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\Execute.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\CodeEditor\Document\DocumentChangeEventArgs.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\Views\Merge\Developer\DirectoryConflicts\AddMoveMenu.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\Views\Merge\Developer\DirectoryConflicts\DrawDirectoryResolutionPanel.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@0b1559bcd34e\Editor\Views\Diff\GetClientDiffInfos.cs" />

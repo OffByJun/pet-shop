@@ -47,8 +47,10 @@
     <Analyzer Include="D:\unityEditor\6000.4.2f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\001_Scripts\Managers\SinManagerBase.cs" />
     <Compile Include="Assets\001_Scripts\Managers\AudioManager.cs" />
     <Compile Include="Assets\001_Scripts\Managers\WorldManager.cs" />
+    <Compile Include="Assets\001_Scripts\UI\UILib\IUIService.cs" />
     <Compile Include="Assets\001_Scripts\UI\Components\UIComponent.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\UIAnimatorComponent.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\UIAnimationSettings.cs" />
@@ -63,12 +65,15 @@
     <Compile Include="Assets\001_Scripts\Data\Customers\CustomerBase.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\UITransition.cs" />
     <Compile Include="Assets\001_Scripts\UI\Components\UIUnityEventAction.cs" />
+    <Compile Include="Assets\001_Scripts\Managers\UIManager.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\UIAnimationTiming.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\UIAnimationPreset.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\UIActionTiming.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\DOTweenTaskExtensions.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\001_Scripts\Data\Pets\PetBase.cs" />
+    <Compile Include="Assets\001_Scripts\Core\Pipes\MessagePipeHub.cs" />
+    <Compile Include="Assets\001_Scripts\Core\Pipes\PipeMessages.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\IUIAction.cs" />
     <Compile Include="Assets\001_Scripts\Managers\EnityManager.cs" />
     <Compile Include="Assets\001_Scripts\UI\UILib\UIAnimationContext.cs" />
@@ -756,6 +761,14 @@
       <Project>{f0ac20b9-b271-5fb2-ced9-eedb27eb0c6f}</Project>
       <Name>Unity.VisualScripting.Flow.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.TextMeshPro.Player.csproj">
+      <Project>{ed2b5214-e602-33e2-a33b-0123996fad07}</Project>
+      <Name>UniTask.TextMeshPro.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.DOTween.Player.csproj">
+      <Project>{8d8bc485-3f9b-718b-bfba-5844cb73dbf9}</Project>
+      <Name>UniTask.DOTween.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.SurfaceCache.Runtime.Player.csproj">
       <Project>{faa5ba93-cefd-ca94-0fd0-fc95b9df3a5e}</Project>
       <Name>Unity.SurfaceCache.Runtime.Player</Name>
@@ -808,6 +821,10 @@
       <Project>{2b66a224-c78f-1cca-834d-b8225611747f}</Project>
       <Name>Unity.RenderPipelines.Universal.Config.Runtime.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.Linq.Player.csproj">
+      <Project>{7407c5eb-5a1a-09ef-fdbd-4b0e09ce4dbf}</Project>
+      <Name>UniTask.Linq.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared.Player.csproj">
       <Project>{d6bddad7-1a8c-1184-b5dd-7e72299f420c}</Project>
       <Name>Unity.InternalAPIEngineBridge.RenderPipelines.Core.Runtime.Shared.Player</Name>
@@ -816,9 +833,21 @@
       <Project>{b3df51f0-6c71-1269-ac19-94220be88fad}</Project>
       <Name>Unity.RenderPipeline.Universal.ShaderLibrary.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="UniTask.Addressables.Player.csproj">
+      <Project>{50b0f62e-2f3e-7f92-230f-7b03156977f6}</Project>
+      <Name>UniTask.Addressables.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.InputSystem.Player.csproj">
       <Project>{81206f3c-7181-41cc-68f5-78417b832f8a}</Project>
       <Name>Unity.InputSystem.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="MessagePipe.Player.csproj">
+      <Project>{dfee7e96-20cb-d3cd-5b9e-3a2bd804f2bd}</Project>
+      <Name>MessagePipe.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniTask.Player.csproj">
+      <Project>{0e6b4525-e268-4204-8b7f-43289b27a5d4}</Project>
+      <Name>UniTask.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,7 +2,7 @@
 
 namespace _001_Scripts.Managers
 {
-    public class WorldManager : GameBehaviour
+    public sealed class WorldManager : SinManagerBase<WorldManager>
     {
         
     }

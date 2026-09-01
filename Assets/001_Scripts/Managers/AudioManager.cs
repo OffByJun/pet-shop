@@ -2,7 +2,7 @@
 
 namespace _001_Scripts.Managers
 {
-    public class AudioManager : GameBehaviour
+    public sealed class AudioManager : SinManagerBase<AudioManager>
     {
         
     }
