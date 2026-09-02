@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c447f911d915748869c388c95ff2e6, type: 3}
+  m_Name: shop_expansion
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Progression.ProgressionUnlockDefinition
+  unlockId: shop_expansion
+  displayName: "\uAC00\uAC8C \uD655\uC7A5"
+  description: 
+  stage: 2
+  expenseCategory: 3
+  cost: 800
+  prerequisites:
+  - {fileID: 11400000, guid: 98ba59bec56d44b478acc081baf445bc, type: 2}
+  - {fileID: 11400000, guid: f85770fce5e510b478948d1478132962, type: 2}
+  benefits:
+  - type: 4
+    value: 1
+    contentId: expanded_shop
+  - type: 5
+    value: 1
+    contentId: expanded_facilities
+  - type: 6
+    value: 1
+    contentId: expanded_pet_attribute_condition_pool

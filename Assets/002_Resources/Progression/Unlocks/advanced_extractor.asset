@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c447f911d915748869c388c95ff2e6, type: 3}
+  m_Name: advanced_extractor
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Progression.ProgressionUnlockDefinition
+  unlockId: advanced_extractor
+  displayName: "\uACE0\uAE09 \uC81C\uAC70 \uC7A5\uBE44"
+  description: 
+  stage: 3
+  expenseCategory: 0
+  cost: 1200
+  prerequisites:
+  - {fileID: 11400000, guid: 4c270a39f4b0451439970c166457eb27, type: 2}
+  benefits:
+  - type: 0
+    value: 0.25
+    contentId: extract
+  - type: 2
+    value: 1
+    contentId: extract_stability
+  - type: 6
+    value: 1
+    contentId: rare_attribute_pets

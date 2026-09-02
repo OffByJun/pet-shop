@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8280574f670db104ca771c7085cb4244, type: 3}
+  m_Name: settlement_shop_ownership
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Progression.SettlementGoalDefinition
+  goalId: settlement_shop_ownership
+  displayName: "\uAC00\uAC8C \uC644\uC804 \uB9E4\uC785"
+  description: 
+  cost: 6500
+  requiredUnlocks:
+  - {fileID: 11400000, guid: 58c7208d8a44f6347b477ab24ba38798, type: 2}
+  continueBusinessAfterCompletion: 1

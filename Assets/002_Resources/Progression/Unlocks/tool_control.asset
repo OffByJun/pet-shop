@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c447f911d915748869c388c95ff2e6, type: 3}
+  m_Name: tool_control
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Progression.ProgressionUnlockDefinition
+  unlockId: tool_control
+  displayName: "\uAE30\uBCF8 \uB3C4\uAD6C \uC81C\uC5B4 \uAC15\uD654"
+  description: 
+  stage: 0
+  expenseCategory: 0
+  cost: 100
+  prerequisites: []
+  benefits:
+  - type: 0
+    value: 0.15
+    contentId: 
+  - type: 2
+    value: 1
+    contentId: steady_input
