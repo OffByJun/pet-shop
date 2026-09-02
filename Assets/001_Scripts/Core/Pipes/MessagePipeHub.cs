@@ -1,50 +1,36 @@
 using System;
+using System.Collections.Generic;
+using _001_Scripts.Core.Pipes.Msgs;
+using _001_Scripts.Core.Pipes.Pipes;
 using MessagePipe;
 using UnityEngine;
 
 namespace _001_Scripts.Core.Pipes
 {
     /// <summary>
-    /// MessagePipe 내장 컨테이너로 파이프의 생성과 수명만 관리합니다.
+    /// MessagePipe 파이프들의 생성, 조회 및 수명을 관리합니다.
     /// </summary>
     [DefaultExecutionOrder(-10_000)]
-    public sealed class MessagePipeHub : MonoBehaviour
+    public sealed class MessagePipeHub : MonoBehaviour, IPipeHub
     {
         public static MessagePipeHub Instance { get; private set; }
 
-        [SerializeField]
-        private bool createInGamePipeOnStart = true;
+        private readonly Dictionary<Type, IPipe> _pipes = new();
 
-        private IDisposablePublisher<GamePipeMessage> _gamePublisher;
-        private ISubscriber<GamePipeMessage> _gameSubscriber;
-
-        private IDisposablePublisher<InGamePipeMessage> _inGamePublisher;
-        private ISubscriber<InGamePipeMessage> _inGameSubscriber;
-
-        private IDisposablePublisher<InternalPipeMessage> _internalPublisher;
-        private ISubscriber<InternalPipeMessage> _internalSubscriber;
-
-        public IPublisher<GamePipeMessage> GamePublisher => _gamePublisher;
-        public ISubscriber<GamePipeMessage> GameSubscriber => _gameSubscriber;
-
-        public IPublisher<InGamePipeMessage> InGamePublisher => _inGamePublisher;
-        public ISubscriber<InGamePipeMessage> InGameSubscriber => _inGameSubscriber;
-
-        public bool HasInGamePipe => _inGamePublisher != null;
-
-        internal IPublisher<InternalPipeMessage> InternalPublisher => _internalPublisher;
-        internal ISubscriber<InternalPipeMessage> InternalSubscriber => _internalSubscriber;
+        private EventFactory _eventFactory;
+        private IServiceProvider _provider;
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void CreateGlobalHub()
         {
             if (FindAnyObjectByType<MessagePipeHub>() != null)
-            {
                 return;
-            }
 
             var hubObject = new GameObject("[Core] MessagePipeHub");
+
             hubObject.AddComponent<MessagePipeHub>();
+
+            DontDestroyOnLoad(hubObject);
         }
 
         private void Awake()
@@ -56,70 +42,135 @@ namespace _001_Scripts.Core.Pipes
             }
 
             Instance = this;
+
             DontDestroyOnLoad(gameObject);
 
+            InitializeMessagePipe();
+        }
+
+        private void InitializeMessagePipe()
+        {
             var builder = new BuiltinContainerBuilder();
+
             builder.AddMessagePipe();
 
-            var provider = builder.BuildServiceProvider();
-            var eventFactory = provider.GetService(typeof(EventFactory)) as EventFactory;
-            if (eventFactory == null)
+            _provider = builder.BuildServiceProvider();
+
+            _eventFactory =
+                _provider.GetService(typeof(EventFactory)) as EventFactory;
+
+            if (_eventFactory == null)
             {
-                throw new InvalidOperationException("MessagePipe EventFactory could not be created.");
+                throw new InvalidOperationException(
+                    "MessagePipe EventFactory could not be created.");
             }
 
-            GlobalMessagePipe.SetProvider(provider);
-            (_gamePublisher, _gameSubscriber) = eventFactory.CreateEvent<GamePipeMessage>();
-            (_internalPublisher, _internalSubscriber) = eventFactory.CreateEvent<InternalPipeMessage>();
+            GlobalMessagePipe.SetProvider(_provider);
         }
 
-        private void Start()
-        {
-            if (createInGamePipeOnStart)
-            {
-                BeginInGamePipe();
-            }
-        }
+        // ─────────────────────────────────────────────
+        // Register
+        // ─────────────────────────────────────────────
 
-        /// <summary>
-        /// 인게임 파이프를 생성합니다. 이미 생성되어 있으면 아무 작업도 하지 않습니다.
-        /// </summary>
-        public void BeginInGamePipe()
+        public void Register<T>()
+            where T : struct, IPipeMsg
         {
-            if (_inGamePublisher != null)
-            {
+            var type = typeof(T);
+
+            if (_pipes.ContainsKey(type))
                 return;
+
+            var (publisher, subscriber) =
+                _eventFactory.CreateEvent<T>();
+
+            var pipe = new Pipe<T>(
+                publisher,
+                subscriber);
+
+            _pipes.Add(type, pipe);
+        }
+
+        // ─────────────────────────────────────────────
+        // Get
+        // ─────────────────────────────────────────────
+
+        public Pipe<T> GetPipe<T>()
+            where T : struct, IPipeMsg
+        {
+            if (!_pipes.TryGetValue(typeof(T), out var pipe))
+            {
+                throw new InvalidOperationException(
+                    $"Pipe<{typeof(T).Name}> is not registered.");
             }
 
-            (_inGamePublisher, _inGameSubscriber) = GlobalMessagePipe.CreateEvent<InGamePipeMessage>();
+            return (Pipe<T>)pipe;
         }
 
-        /// <summary>
-        /// 인게임 파이프와 연결된 모든 구독을 종료합니다.
-        /// </summary>
-        public void EndInGamePipe()
+        public bool TryGetPipe<T>(out Pipe<T> pipe)
+            where T : struct, IPipeMsg
         {
-            _inGamePublisher?.Dispose();
-            _inGamePublisher = null;
-            _inGameSubscriber = null;
+            if (_pipes.TryGetValue(typeof(T), out var rawPipe))
+            {
+                pipe = (Pipe<T>)rawPipe;
+                return true;
+            }
+
+            pipe = null;
+            return false;
         }
+
+        public bool IsRegistered<T>()
+            where T : struct, IPipeMsg
+        {
+            return _pipes.ContainsKey(typeof(T));
+        }
+
+        // ─────────────────────────────────────────────
+        // Publish / Subscribe
+        // ─────────────────────────────────────────────
+
+        public void Publish<T>(in T message)
+            where T : struct, IPipeMsg
+        {
+            GetPipe<T>().Publish(in message);
+        }
+
+        public IDisposable Subscribe<T>(Action<T> action)
+            where T : struct, IPipeMsg
+        {
+            return GetPipe<T>().Subscribe(action);
+        }
+
+        // ─────────────────────────────────────────────
+        // Unregister
+        // ─────────────────────────────────────────────
+
+        public void Unregister<T>()
+            where T : struct, IPipeMsg
+        {
+            var type = typeof(T);
+
+            if (!_pipes.Remove(type, out var pipe))
+                return;
+
+            pipe.Dispose();
+        }
+
+        // ─────────────────────────────────────────────
+        // Lifetime
+        // ─────────────────────────────────────────────
 
         private void OnDestroy()
         {
             if (Instance != this)
-            {
                 return;
+
+            foreach (var pipe in _pipes.Values)
+            {
+                pipe.Dispose();
             }
 
-            EndInGamePipe();
-
-            _internalPublisher?.Dispose();
-            _internalPublisher = null;
-            _internalSubscriber = null;
-
-            _gamePublisher?.Dispose();
-            _gamePublisher = null;
-            _gameSubscriber = null;
+            _pipes.Clear();
 
             Instance = null;
         }
