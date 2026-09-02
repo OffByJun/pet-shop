@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1161aad14d4984d90da877b4010118, type: 3}
+  m_Name: crystal_cat
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Pets.PetVariantDefinition
+  variantId: crystal_cat
+  displayName: "\uC218\uC815 \uACE0\uC591\uC774"
+  description: 
+  icon: {fileID: 0}
+  baseAnimal: {fileID: 11400000, guid: 324742e5322b9ad48b5694b610376834, type: 2}
+  attribute: {fileID: 11400000, guid: 51083a0fc5e3e91428f26840f1399315, type: 2}
+  requiredProgressionContentId: rare_attribute_pets
+  byproducts:
+  - CareAction: 5
+    Item: {fileID: 11400000, guid: 84b40ef36616c4a45811f940435be2f4, type: 2}
+    MinAmount: 1
+    MaxAmount: 2
+    Chance: 1

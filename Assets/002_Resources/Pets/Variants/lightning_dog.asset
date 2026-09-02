@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1161aad14d4984d90da877b4010118, type: 3}
+  m_Name: lightning_dog
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Pets.PetVariantDefinition
+  variantId: lightning_dog
+  displayName: "\uBC88\uAC1C \uAC1C"
+  description: 
+  icon: {fileID: 0}
+  baseAnimal: {fileID: 11400000, guid: 2ac6ac9119fe83d48891eee4ca8dde62, type: 2}
+  attribute: {fileID: 11400000, guid: c2cdfa117c63dce4fb88dd98065f706a, type: 2}
+  requiredProgressionContentId: rare_attribute_pets
+  byproducts:
+  - CareAction: 1
+    Item: {fileID: 11400000, guid: 6fa7ddeb2cf9e1843b66dc271e2d7652, type: 2}
+    MinAmount: 1
+    MaxAmount: 2
+    Chance: 1
