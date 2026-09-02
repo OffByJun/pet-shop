@@ -17,6 +17,9 @@ namespace _001_Scripts.UI.Components
         [SerializeField] private UIAnimationPreset animationPreset;
         [SerializeField] private string serviceId;
 
+        [Tooltip("숨김 상태에서는 GameObject를 꺼둡니다. 시작 시 숨김이면 등록을 마친 뒤 스스로 꺼지고, Show 요청이 오면 다시 켜집니다.")]
+        [SerializeField] private bool deactivateWhenHidden;
+
         private readonly List<IUIAnimator> animators = new List<IUIAnimator>();
         private readonly List<IUIAction> actions = new List<IUIAction>();
         private CancellationTokenSource lifetimeCancellation;
@@ -36,6 +39,20 @@ namespace _001_Scripts.UI.Components
             RefreshComponents();
             EnsureLifetimeToken();
             SetInstant(initialState == UIVisibilityState.Visible);
+
+            // 모든 UI는 시작할 때 스스로를 등록합니다. UIManager는 이 메시지 외의 경로로 UI를 찾지 않습니다.
+            UIPipe.Register(this);
+        }
+
+        /// <summary>
+        /// 등록이 끝난 뒤에 꺼야 하므로 Awake가 아니라 Start에서 비활성화합니다.
+        /// </summary>
+        protected virtual void Start()
+        {
+            if (deactivateWhenHidden && State == UIVisibilityState.Hidden)
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         protected virtual void OnEnable()
@@ -49,6 +66,15 @@ namespace _001_Scripts.UI.Components
             lifetimeCancellation?.Cancel();
             lifetimeCancellation?.Dispose();
             lifetimeCancellation = null;
+        }
+
+        /// <summary>
+        /// 비활성화가 아니라 파괴될 때 해제합니다.
+        /// 꺼져 있는 패널도 ID로 다시 열 수 있어야 하므로 등록은 유지되어야 합니다.
+        /// </summary>
+        protected virtual void OnDestroy()
+        {
+            UIPipe.Unregister(this);
         }
 
         public void RefreshComponents()
@@ -120,9 +146,25 @@ namespace _001_Scripts.UI.Components
 
         private async Task TransitionAsync(UITransition transition, CancellationToken externalToken)
         {
+            // 꺼져 있는 패널을 여는 것이 기본 사용 흐름이므로 여기서 되살립니다.
+            // Awake/OnEnable이 이 시점에 동기로 실행되어 초기 상태가 먼저 적용됩니다.
+            if (transition == UITransition.Show && !gameObject.activeSelf)
+            {
+                gameObject.SetActive(true);
+            }
+
             if (!isActiveAndEnabled)
             {
-                throw new InvalidOperationException($"{name} must be active and enabled before starting a UI transition.");
+                if (transition == UITransition.Hide)
+                {
+                    // 이미 꺼져 있으면 숨김 요청은 그대로 달성된 상태입니다.
+                    settledState = UIVisibilityState.Hidden;
+                    State = settledState;
+                    return;
+                }
+
+                throw new InvalidOperationException(
+                    $"{name} could not be activated for a UI transition. Check its parent hierarchy and enabled state.");
             }
 
             EnsureLifetimeToken();
@@ -160,6 +202,11 @@ namespace _001_Scripts.UI.Components
                     : UIVisibilityState.Hidden;
                 State = settledState;
                 await RunActionsAsync(after, transition, localCancellation.Token);
+
+                if (transition == UITransition.Hide && deactivateWhenHidden)
+                {
+                    gameObject.SetActive(false);
+                }
             }
             catch (OperationCanceledException) when (localCancellation.IsCancellationRequested)
             {

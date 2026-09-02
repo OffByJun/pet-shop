@@ -20,9 +20,35 @@ namespace _001_Scripts.Core.Pipes
         private EventFactory _eventFactory;
         private IServiceProvider _provider;
 
+        private static bool _isShuttingDown;
+
+        public static bool IsShuttingDown => _isShuttingDown;
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void CreateGlobalHub()
         {
+            _isShuttingDown = false;
+
+            Application.quitting -= OnApplicationQuitting;
+            Application.quitting += OnApplicationQuitting;
+
+            EnsureInstance();
+        }
+
+        private static void OnApplicationQuitting()
+        {
+            _isShuttingDown = true;
+        }
+
+        /// <summary>
+        /// 허브가 없으면 즉시 만듭니다. 초기화 순서에 의존하지 않도록 공개합니다.
+        /// 종료 중에는 파괴 도중 재생성을 막기 위해 아무것도 하지 않습니다.
+        /// </summary>
+        public static void EnsureInstance()
+        {
+            if (Instance != null || _isShuttingDown)
+                return;
+
             if (FindAnyObjectByType<MessagePipeHub>() != null)
                 return;
 
