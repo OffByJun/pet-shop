@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde884471a454344bba1719d2c9ad15b, type: 3}
+  m_Name: adventurer
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Customers.CustomerTypeDefinition
+  customerTypeId: adventurer
+  displayName: "\uBAA8\uD5D8\uAC00"
+  archetype: 1
+  portrait: {fileID: 0}
+  visualPrefab: {fileID: 0}
+  appearanceWeight: 1
+  minimumRequiredRequests: 2
+  maximumRequiredRequests: 3
+  minimumOptionalCare: 0
+  maximumOptionalCare: 1
+  elementalPetChance: 0.35
+  rareByproductChance: 0.15
+  economyTierId: adventurer
+  conditionPreferences:
+  - Condition: {fileID: 11400000, guid: bac34985d2838ba45bff99bb4e3bb0c4, type: 2}
+    Weight: 4
+  - Condition: {fileID: 11400000, guid: 0c6d331fcf2f29448860e04e2745b9cc, type: 2}
+    Weight: 4
+  - Condition: {fileID: 11400000, guid: fc0bb560deb511845a8745a377ff35d3, type: 2}
+    Weight: 3
+  - Condition: {fileID: 11400000, guid: c4d213f45b3fb6d408cd7cd72db67823, type: 2}
+    Weight: 2
+  - Condition: {fileID: 11400000, guid: 73fec31d65f3afa49beeb390c4f8bfc0, type: 2}
+    Weight: 1

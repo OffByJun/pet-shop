@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bde884471a454344bba1719d2c9ad15b, type: 3}
+  m_Name: merchant
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Customers.CustomerTypeDefinition
+  customerTypeId: merchant
+  displayName: "\uC0C1\uC778"
+  archetype: 3
+  portrait: {fileID: 0}
+  visualPrefab: {fileID: 0}
+  appearanceWeight: 1
+  minimumRequiredRequests: 1
+  maximumRequiredRequests: 2
+  minimumOptionalCare: 1
+  maximumOptionalCare: 2
+  elementalPetChance: 0.45
+  rareByproductChance: 0.75
+  economyTierId: merchant
+  conditionPreferences:
+  - Condition: {fileID: 11400000, guid: 21c6b4b4c9dfd77499b2fe1d80252a1c, type: 2}
+    Weight: 3
+  - Condition: {fileID: 11400000, guid: b9fad18109be8fd4e996a2cf66e6be1f, type: 2}
+    Weight: 3
+  - Condition: {fileID: 11400000, guid: c4d213f45b3fb6d408cd7cd72db67823, type: 2}
+    Weight: 2
+  - Condition: {fileID: 11400000, guid: 73fec31d65f3afa49beeb390c4f8bfc0, type: 2}
+    Weight: 2
+  - Condition: {fileID: 11400000, guid: 157e5fca49efd114698c0948b74df710, type: 2}
+    Weight: 1
