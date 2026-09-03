@@ -1,0 +1,30 @@
+using System;
+using _001_Scripts.Data.Customers;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+namespace PetShop.Care
+{
+    /// <summary>Infrastructure adapter for visit persistence and Unity scene navigation.</summary>
+    public sealed class ReceptionCareSceneTransition : MonoBehaviour, ICareSceneTransition
+    {
+        [SerializeField] private string careSceneName = "CarePlayScene";
+        private ServiceOrder preparedOrder;
+
+        public void Prepare(ServiceOrder order)
+        {
+            preparedOrder = order ?? throw new ArgumentNullException(nameof(order));
+            CareHandoffContext.Set(order);
+        }
+
+        public void EnterCareScene()
+        {
+            if (preparedOrder != null) SceneManager.LoadScene(careSceneName);
+        }
+
+        public void ResetState()
+        {
+            preparedOrder = null;
+        }
+    }
+}
