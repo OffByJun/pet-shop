@@ -2649,9 +2649,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0c64e6749fd4c09af87121fe0d7f30d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.CarePlayScene
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Managers.CareManager
   view: {fileID: 1946210980}
   stageInput: {fileID: 947062899}
+  persistAcrossScenes: 0
 --- !u!4 &531899921
 Transform:
   m_ObjectHideFlags: 0
@@ -3859,7 +3860,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf9f70c44d5834040bd869d735a318b7, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.CareStageInput
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.UI.Components.CareStageInput
   conditionTargets:
   - {fileID: 1736606845}
   - {fileID: 1695577701}
@@ -7911,7 +7912,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 24ba8ccb31ba6f747b5abc38ad693f14, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.CareUIComponent
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.UI.Components.CareUIComponent
   titleText: {fileID: 566271554}
   remainingText: {fileID: 1825795546}
   messageText: {fileID: 1684240446}
@@ -8503,10 +8504,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134442738}
   m_CullTransparentMesh: 1
+--- !u!1 &900000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900000002}
+  - component: {fileID: 900000011}
+  - component: {fileID: 900000012}
+  m_Layer: 0
+  m_Name: Game Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &900000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900000011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0313a3664740569e61f485d91681c1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Managers.GameManager
+  persistAcrossScenes: 1
+  orderCatalog: {fileID: 11400000, guid: 0a2d740e87f6304409e8e3450e613781, type: 2}
+  economyProvider: {fileID: 11400000, guid: 246533ac290e75b4c96af46b806733de, type: 2}
+  progressionCatalog: {fileID: 11400000, guid: 4ea7fca426c4b3c46ad8bfb8e75c939c, type: 2}
+--- !u!114 &900000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b645ad12b7cdbf949a13ea4e8d9e7032, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Managers.InventoryManager
+  persistAcrossScenes: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 900000002}
   - {fileID: 531899921}
   - {fileID: 156282941}
   - {fileID: 1946210984}

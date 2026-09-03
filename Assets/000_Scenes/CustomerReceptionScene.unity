@@ -978,7 +978,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1a05066abe6b497183e6b2855e1d2486, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.ReceptionUIComponent
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.UI.Components.ReceptionUIComponent
   speakerText: {fileID: 1733735592}
   dialogueText: {fileID: 1537095975}
   patienceSlider: {fileID: 465486729}
@@ -1298,7 +1298,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 776870347}
-  - component: {fileID: 776870346}
   - component: {fileID: 776870345}
   - component: {fileID: 776870344}
   - component: {fileID: 776870343}
@@ -1321,13 +1320,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f85f6941dcd4b8a94311e01301e8c80, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.CustomerReceptionScene
-  orderProviderComponent: {fileID: 776870346}
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Managers.ReceptionManager
   dialogueComponent: {fileID: 776870345}
   handoffComponent: {fileID: 776870344}
   customerActorComponent: {fileID: 2110238153}
   transitionComponent: {fileID: 776870343}
   viewComponent: {fileID: 620442946}
+  persistAcrossScenes: 0
 --- !u!114 &776870343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1339,7 +1338,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 52b581e3d80a0d443aee3f74e808e840, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.ReceptionCareSceneTransition
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Core.Entity.ReceptionCareSceneTransition
   careSceneName: CarePlayScene
 --- !u!114 &776870344
 MonoBehaviour:
@@ -1352,7 +1351,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f62f474763c4f5eb9f215e63da65ce0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.ReceptionHandoff
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Core.Entity.ReceptionHandoff
   duration: 1.1
 --- !u!114 &776870345
 MonoBehaviour:
@@ -1365,23 +1364,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 28d67bbb125544aebd5326d91cf2b0de, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.ReceptionDialogueSession
---- !u!114 &776870346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 776870341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 037af7effff24504a43a3f4f64fb4075, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.ReceptionOrderSource
-  orderService: {fileID: 0}
-  fallbackCatalog: {fileID: 11400000, guid: 0a2d740e87f6304409e8e3450e613781, type: 2}
-  supportedActions: 000000000100000004000000050000000600000007000000
-  maximumGenerationAttempts: 20
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Core.Entity.ReceptionDialogueSession
 --- !u!4 &776870347
 Transform:
   m_ObjectHideFlags: 0
@@ -3887,7 +3870,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03861369a81b40a2a358cbe17464a25b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PetShop.Care.ReceptionCustomerActor
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Core.Entity.ReceptionCustomerActor
   customerRoot: {fileID: 2110238152}
   carrierRoot: {fileID: 1224525051}
   deskPetAnchor: {fileID: 1368530742}
@@ -3982,10 +3965,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2139590979}
   m_CullTransparentMesh: 1
+--- !u!1 &900000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 900000002}
+  - component: {fileID: 900000011}
+  - component: {fileID: 900000012}
+  m_Layer: 0
+  m_Name: Game Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &900000002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &900000011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0313a3664740569e61f485d91681c1, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Managers.GameManager
+  persistAcrossScenes: 1
+  orderCatalog: {fileID: 11400000, guid: 0a2d740e87f6304409e8e3450e613781, type: 2}
+  economyProvider: {fileID: 11400000, guid: 246533ac290e75b4c96af46b806733de, type: 2}
+  progressionCatalog: {fileID: 11400000, guid: 4ea7fca426c4b3c46ad8bfb8e75c939c, type: 2}
+--- !u!114 &900000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b645ad12b7cdbf949a13ea4e8d9e7032, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Managers.InventoryManager
+  persistAcrossScenes: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 900000002}
   - {fileID: 776870347}
   - {fileID: 1678120765}
   - {fileID: 620442950}
