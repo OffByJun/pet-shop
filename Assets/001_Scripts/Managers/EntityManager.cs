@@ -2,7 +2,7 @@
 
 namespace _001_Scripts.Managers
 {
-    public sealed class EnityManager : SinManagerBase<EnityManager>
+    public sealed class EntityManager : SinManagerBase<EntityManager>
     {
         
     }
