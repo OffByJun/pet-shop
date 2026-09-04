@@ -4,18 +4,24 @@ using _001_Scripts.Core.Pipes;
 using _001_Scripts.Core.Pipes.Msgs;
 using _001_Scripts.Data.Economy;
 using _001_Scripts.Data.Items;
+using _001_Scripts.Managers.Interfaces;
 using UnityEngine;
 
 namespace _001_Scripts.Managers
 {
     /// <summary>보유 아이템과 화폐를 관리하고 획득, 판매, 구매를 처리합니다.</summary>
-    public sealed class InventoryManager : SinManagerBase<InventoryManager>, IItemContainer, IItemAcquisitionService, IItemSellService, ICurrencyWallet, IEconomyPurchaseService
+    public sealed class InventoryManager : ServiceManagerBase<InventoryManager>, IInventoryService
     {
         [SerializeField, Min(1)] private int capacity = 24;
         [SerializeField, Min(0)] private int balance;
 
         private readonly List<ItemStack> stacks = new List<ItemStack>();
         private bool selling;
+
+        protected override void ProvideServices()
+        {
+            Provide<IInventoryService>();
+        }
 
         protected override void SubscribeGamePipes()
         {

@@ -10,12 +10,13 @@ using _001_Scripts.Data.Items;
 using _001_Scripts.Data.Pets;
 using _001_Scripts.Data.Progression;
 using _001_Scripts.Data.Tools;
+using _001_Scripts.Managers.Interfaces;
 using UnityEngine;
 
 namespace _001_Scripts.Managers
 {
     /// <summary>하루 진행, 손님 주문과 상점 진행도를 관리합니다.</summary>
-    public sealed class GameManager : SinManagerBase<GameManager>
+    public sealed class GameManager : ServiceManagerBase<GameManager>, IDayService, IOrderService, IProgressionService
     {
         [SerializeField] private GameSettings settings;
         [SerializeField] private ServiceOrderCatalog orderCatalog;
@@ -44,6 +45,13 @@ namespace _001_Scripts.Managers
         private WorldContext world;
 
         public IWorldContext World => world;
+
+        protected override void ProvideServices()
+        {
+            Provide<IDayService>();
+            Provide<IOrderService>();
+            Provide<IProgressionService>();
+        }
 
         protected override void SubscribeGamePipes()
         {

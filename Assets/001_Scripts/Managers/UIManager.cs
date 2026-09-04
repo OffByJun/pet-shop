@@ -14,7 +14,7 @@ namespace _001_Scripts.Managers
     /// 호출자는 UIManager를 직접 참조하지 않고 <see cref="UIPipe"/>로 통신합니다.
     /// </summary>
     [DefaultExecutionOrder(-9_000)]
-    public sealed class UIManager : SinManagerBase<UIManager>, IUIService
+    public sealed class UIManager : ServiceManagerBase<UIManager>, IUIService
     {
         private readonly Dictionary<string, UIComponent> components =
             new Dictionary<string, UIComponent>(StringComparer.Ordinal);
@@ -36,6 +36,11 @@ namespace _001_Scripts.Managers
 
             var managerObject = new GameObject("[Manager] UIManager");
             managerObject.AddComponent<UIManager>();
+        }
+
+        protected override void ProvideServices()
+        {
+            Provide<IUIService>();
         }
 
         protected override void OnManagerAwake()

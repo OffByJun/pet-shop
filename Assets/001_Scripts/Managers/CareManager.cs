@@ -1,6 +1,7 @@
 using _001_Scripts.Core.Pipes;
 using _001_Scripts.Core.Pipes.Msgs;
 using _001_Scripts.Data;
+using _001_Scripts.Managers.Interfaces;
 using _001_Scripts.UI.Components;
 using _001_Scripts.UI.UILib;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine;
 namespace _001_Scripts.Managers
 {
     /// <summary>Coordinates the care use case. Rendering and pointer input are uGUI adapters.</summary>
-    public sealed class CareManager : SinManagerBase<CareManager>
+    public sealed class CareManager : ServiceManagerBase<CareManager>, ICareService
     {
         [SerializeField] private CareUIComponent view;
         [SerializeField] private CareStageInput stageInput;
@@ -17,6 +18,11 @@ namespace _001_Scripts.Managers
         private CareToolKind selectedTool = CareToolKind.Sprayer;
         private int selectedCondition = -1;
         private string message = "상태를 확인하고 알맞은 도구를 선택하세요.";
+
+        protected override void ProvideServices()
+        {
+            Provide<ICareService>();
+        }
 
         protected override void SubscribeGamePipes()
         {

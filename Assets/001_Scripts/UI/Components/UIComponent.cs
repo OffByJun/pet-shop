@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using _001_Scripts.Core;
+using _001_Scripts.Core.Composition;
 using _001_Scripts.UI.UILib;
 using UnityEngine;
 
@@ -20,8 +21,8 @@ namespace _001_Scripts.UI.Components
         [Tooltip("숨김 상태에서는 GameObject를 꺼둡니다. 시작 시 숨김이면 등록을 마친 뒤 스스로 꺼지고, Show 요청이 오면 다시 켜집니다.")]
         [SerializeField] private bool deactivateWhenHidden;
 
-        private readonly List<IUIAnimator> animators = new List<IUIAnimator>();
-        private readonly List<IUIAction> actions = new List<IUIAction>();
+        private readonly ModuleSet<IUIAnimator> animators = new ModuleSet<IUIAnimator>();
+        private readonly ModuleSet<IUIAction> actions = new ModuleSet<IUIAction>();
         private CancellationTokenSource lifetimeCancellation;
         private CancellationTokenSource transitionCancellation;
         private UIVisibilityState settledState;
@@ -77,41 +78,11 @@ namespace _001_Scripts.UI.Components
             UIPipe.Unregister(this);
         }
 
+        /// <summary>자기 소유의 애니메이터/액션을 다시 모읍니다. 수집과 정렬은 공용 ModuleSet이 담당합니다.</summary>
         public void RefreshComponents()
         {
-            animators.Clear();
-            actions.Clear();
-
-            MonoBehaviour[] behaviours = includeChildren
-                ? GetComponentsInChildren<MonoBehaviour>(true)
-                : GetComponents<MonoBehaviour>();
-
-            foreach (MonoBehaviour behaviour in behaviours)
-            {
-                if (behaviour == this || !behaviour.enabled)
-                {
-                    continue;
-                }
-
-                // A nested UIComponent owns its own animation/action components.
-                // This keeps a parent panel transition from driving an independent child panel.
-                if (behaviour.GetComponentInParent<UIComponent>(true) != this)
-                {
-                    continue;
-                }
-
-                if (behaviour is IUIAnimator animator)
-                {
-                    animators.Add(animator);
-                }
-
-                if (behaviour is IUIAction action)
-                {
-                    actions.Add(action);
-                }
-            }
-
-            actions.Sort((left, right) => left.Order.CompareTo(right.Order));
+            animators.Collect(this, includeChildren);
+            actions.Collect(this, includeChildren);
         }
 
         public Task ShowAsync(CancellationToken cancellationToken = default)
