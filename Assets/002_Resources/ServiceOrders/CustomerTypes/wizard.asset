@@ -15,8 +15,21 @@ MonoBehaviour:
   customerTypeId: wizard
   displayName: "\uB9C8\uBC95\uC0AC"
   archetype: 2
-  portrait: {fileID: 0}
+  portrait: {fileID: 21300000, guid: 779110c5a23949e489dba8bea220397c, type: 3}
+  portraitUneasy: {fileID: 21300000, guid: db3a7c0759abd7b4da70034b330e0efe, type: 3}
+  portraitUpset: {fileID: 21300000, guid: 71504e6425e9b9743a1dd1f0d1b7c352, type: 3}
   visualPrefab: {fileID: 0}
+  characterName: "\uC140\uB9B0"
+  tagline: "\uC57D\uCD08\uB97C \uB2EC\uC774\uB294 \uACAC\uC2B5 \uB9C8\uBC95\uC0AC"
+  visitGreetings:
+  - "\uC2E4\uD5D8\uC774 \uAE38\uC5B4\uC838\uC11C \uB3CC\uBCFC \uD2C8\uC774 \uC5C6\uC5C8\uC5B4\uC694.
+    {pet}\uC774(\uAC00) {clue}."
+  - "\uC81C \uC870\uD569\uBCF4\uB2E4 \uC5EC\uAE30\uAC00 \uB0AB\uB354\uAD70\uC694.
+    {pet}\uC774(\uAC00) {clue}."
+  returningHappyLine: "\uC9C0\uB09C\uBC88 \uACB0\uACFC\uB97C \uAE30\uB85D\uD574 \uB480\uC5B4\uC694.
+    \uC7AC\uD604 \uBD80\uD0C1\uB4DC\uB824\uC694. {pet}\uC774(\uAC00) {clue}."
+  returningUpsetLine: "\uC9C0\uB09C\uBC88 \uBCC0\uC218\uAC00 \uBB50\uC600\uC744\uAE4C\uC694.
+    \uB2E4\uC2DC \uD574\uBD10\uC694. {pet}\uC774(\uAC00) {clue}."
   appearanceWeight: 1
   minimumRequiredRequests: 1
   maximumRequiredRequests: 3

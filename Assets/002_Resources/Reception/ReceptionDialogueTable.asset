@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af46510d4bd59964b940f5a7aa75e465, type: 3}
+  m_Name: ReceptionDialogueTable
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Customers.ReceptionDialogueTable
+  greetings:
+  - Archetype: 1
+    Line: "\uAE34 \uC5EC\uD589\uC744 \uB9C8\uCE58\uACE0 \uC654\uC5B4\uC694. {pet}\uC774(\uAC00)
+      {clue}."
+  - Archetype: 2
+    Line: "\uC694\uC998 {pet}\uC774(\uAC00) {clue}. \uC6D0\uC778\uC744 \uC0B4\uD3B4\uBD10
+      \uC8FC\uC138\uC694."
+  - Archetype: 3
+    Line: "\uAE54\uB054\uD55C \uAD00\uB9AC\uAC00 \uD544\uC694\uD574\uC694. {pet}\uC774(\uAC00)
+      {clue}."
+  - Archetype: 4
+    Line: "\uC6B0\uB9AC {pet}\uC774(\uAC00) {clue}. \uC138\uC2EC\uD788 \uBD80\uD0C1\uB4DC\uB824\uC694."
+  defaultGreeting: "\uC548\uB155\uD558\uC138\uC694. {pet}\uC774(\uAC00) {clue}. \uD55C\uBC88
+    \uBD10\uC8FC\uC2DC\uACA0\uC5B4\uC694?"
+  clues:
+  - Category: 0
+    Line: "\uBAB8\uC774 \uBB34\uAC81\uACE0 \uBC14\uB2E5\uC5D0 \uC790\uAD6D\uC744
+      \uB0A8\uACA8\uC694"
+  - Category: 1
+    Line: "\uD55C\uCABD\uC744 \uB9CC\uC9C0\uBA74 \uC6C0\uCC14\uD574\uC694"
+  - Category: 4
+    Line: "\uD138\uC774 \uBE57\uC790\uB8E8\uCC98\uB7FC \uC5C9\uCF1C \uC788\uC5B4\uC694"
+  - Category: 5
+    Line: "\uBAB8\uC5D0 \uC791\uC740 \uAC83\uC774 \uC790\uB780 \uAC83 \uAC19\uC544\uC694"
+  - Category: 6
+    Line: "\uBAB8 \uD55C\uCABD\uC774 \uC720\uB09C\uD788 \uBC18\uC9DD\uC5EC\uC694"
+  - Category: 7
+    Line: "\uAC78\uC744 \uB54C \uBC14\uB2E5\uC744 \uAE01\uB294 \uC18C\uB9AC\uAC00
+      \uB098\uC694"
+  - Category: 2
+    Line: "\uAE30\uC6B4\uC774 \uC5C6\uC5B4 \uBCF4\uC5EC\uC694"
+  - Category: 3
+    Line: "\uAD6C\uC11D\uC5D0 \uC624\uB798 \uC228\uC5B4 \uC788\uC5B4\uC694"
+  defaultClue: "\uD3C9\uC18C\uC640 \uC870\uAE08 \uB2EC\uB77C \uBCF4\uC5EC\uC694"
+  questions:
+  - Category: 0
+    Line: "\uC5B4\uB514\uAC00 \uAC00\uC7A5 \uB354\uB7EC\uC6CC\uC84C\uB098\uC694?"
+  - Category: 1
+    Line: "\uB2E4\uCE5C \uACF3\uC744 \uC790\uC138\uD788 \uBCF4\uC168\uB098\uC694?"
+  - Category: 4
+    Line: "\uD138 \uC0C1\uD0DC\uB97C \uC870\uAE08 \uB354 \uC124\uBA85\uD574 \uC8FC\uC138\uC694."
+  - Category: 5
+    Line: "\uBAB8\uC5D0 \uC790\uB780 \uAC83\uC774 \uC815\uD655\uD788 \uBB34\uC5C7\uC778\uAC00\uC694?"
+  - Category: 6
+    Line: "\uBD99\uC5B4 \uC788\uB294 \uBB3C\uCCB4\uAC00 \uBB34\uC5C7\uC778\uAC00\uC694?"
+  - Category: 7
+    Line: "\uBC1C\uD1B1 \uC0C1\uD0DC\uB294 \uC5B4\uB5A4\uAC00\uC694?"
+  defaultQuestion: "{condition}\uC5D0 \uB300\uD574 \uB354 \uC54C\uB824\uC8FC\uC138\uC694."
+  conditionOverrides: []
+  replyFormat: "\uC790\uC138\uD788 \uBCF4\uB2C8 \u2018{condition}\u2019 \uC0C1\uD0DC\uC608\uC694.
+    {action} \uCF00\uC5B4\uAC00 \uD544\uC694\uD574 \uBCF4\uC5EC\uC694."
+  actionLabels:
+  - Action: 0
+    Label: "\uC138\uCC99"
+  - Action: 1
+    Label: "\uBE57\uC9C8"
+  - Action: 4
+    Label: "\uCE58\uB8CC"
+  - Action: 5
+    Label: "\uC81C\uAC70"
+  - Action: 6
+    Label: "\uC190\uC9C8"
+  - Action: 7
+    Label: "\uBC1C\uD1B1 \uC190\uC9C8"
+  - Action: 2
+    Label: "\uAE09\uC2DD"
+  - Action: 3
+    Label: "\uB180\uC774"
+  defaultActionLabel: "\uC0C1\uD0DC\uC5D0 \uB9DE\uB294"
+  playerSpeakerName: "\uB098"
+  acceptLine: "\uD655\uC778\uD588\uC2B5\uB2C8\uB2E4. {pet}\uC758 \uC0C1\uD0DC\uBD80\uD130
+    \uC0B4\uD3B4\uBCFC\uAC8C\uC694."
+  rejectLine: "\uC544\uC27D\uC9C0\uB9CC \uC54C\uACA0\uC5B4\uC694. \uB2E4\uC74C\uC5D0
+    \uB2E4\uC2DC \uCC3E\uC544\uC62C\uAC8C\uC694."
+  handoffLine: "\uC798 \uBD80\uD0C1\uB4DC\uB9B4\uAC8C\uC694. {pet}\uC744(\uB97C)
+    \uB9E1\uAE38\uAC8C\uC694."
+  giveUpLine: "\uB108\uBB34 \uC624\uB798 \uAE30\uB2E4\uB838\uB124\uC694. \uB2E4\uC74C\uC5D0
+    \uB2E4\uC2DC \uC62C\uAC8C\uC694."

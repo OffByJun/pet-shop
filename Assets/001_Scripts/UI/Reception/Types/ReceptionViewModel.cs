@@ -36,6 +36,9 @@ namespace _001_Scripts.UI.UILib
         public string Speaker { get; }
         public string Line { get; }
         public float Patience { get; }
+        /// <summary>손님과의 관계 배지 문구입니다. 없으면 빈 문자열입니다.</summary>
+        public string BondLabel { get; }
+        public int VisitNumber { get; }
         public bool CanInteract { get; }
         public bool CanEnterCare { get; }
 
@@ -47,6 +50,11 @@ namespace _001_Scripts.UI.UILib
             Speaker = dialogue.Speaker;
             Line = dialogue.Line;
             Patience = dialogue.Patience;
+            var relationship = dialogue.Relationship;
+            VisitNumber = relationship == null ? 0 : relationship.Visits + 1;
+            BondLabel = relationship != null && _001_Scripts.Managers.ShopRoutineManager.HasInstance
+                ? _001_Scripts.Managers.ShopRoutineManager.Instance.BondWith(Order.Customer).Label
+                : string.Empty;
             CanInteract = canInteract;
             CanEnterCare = canEnterCare;
         }

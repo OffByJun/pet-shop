@@ -21,7 +21,10 @@ namespace _001_Scripts.Core.Entity
 
         public void EnterCareScene()
         {
-            if (preparedOrder != null) SceneManager.LoadScene(careSceneName);
+            if (preparedOrder == null) return;
+            if (_001_Scripts.Managers.ShopRoutineManager.HasInstance)
+                _001_Scripts.Managers.ShopRoutineManager.Instance.EnterCare();
+            else SceneManager.LoadScene(careSceneName);
         }
 
         public void ResetState()

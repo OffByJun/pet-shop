@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062097af7f0331648a8e075d540ab570, type: 3}
+  m_Name: ReceptionSettings
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Customers.ReceptionSettings
+  startingPatience: 1
+  drainPerSecond: 0.016
+  questionCost: 0.12
+  questionFloor: 0.2
+  leaveWhenPatienceEmpty: 1
+  lines: {fileID: 11400000, guid: 48fd1f4ec4b7b284f8a31cdca8c16b36, type: 2}
+  uneasyPatience: 0.8
+  upsetPatience: 0.65

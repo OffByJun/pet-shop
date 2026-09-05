@@ -37,8 +37,12 @@ namespace _001_Scripts.Core.Entity
         };
         [SerializeField] private Color defaultCustomerColor = new Color32(89, 158, 120, 255);
         [SerializeField] private Color defaultPetColor = new Color32(224, 176, 113, 255);
+        [Tooltip("초상화 스프라이트가 있을 때 감추는 대체 도형입니다.")]
+        [SerializeField] private GameObject[] placeholderShapes = new GameObject[0];
 
         private Vector2 carrierHome;
+        private CustomerBase portraitSource;
+        private Sprite appliedPortrait;
         private float moveStarted;
         private bool entering;
         private bool exiting;
@@ -58,8 +62,12 @@ namespace _001_Scripts.Core.Entity
         {
             if (order == null) throw new System.ArgumentNullException(nameof(order));
             Initialize(order.Customer);
+            portraitSource = order.Customer;
+            appliedPortrait = null;
             if (customerRoot == null) return;
             ApplyOrderColors(order);
+            ApplyOrderSprites(order);
+            SetMood(CustomerMood.Calm);
             customerRoot.anchoredPosition = hiddenLeftPosition;
             if (carrierRoot != null) carrierRoot.anchoredPosition = carrierHome;
             handingOff = false;
@@ -123,8 +131,39 @@ namespace _001_Scripts.Core.Entity
             if (petBody != null) petBody.color = defaultPetColor;
         }
 
-        public void Configure(RectTransform customer, RectTransform carrier, RectTransform deskAnchor, Image body, Image pet)
+        /// <summary>손님 초상화와 펫 아이콘을 주문 데이터에서 가져옵니다.</summary>
+        private void ApplyOrderSprites(ServiceOrder order)
         {
+            var portrait = order.Customer.Portrait;
+            if (customerBody != null)
+            {
+                customerBody.sprite = portrait;
+                customerBody.preserveAspect = portrait != null;
+                if (portrait != null) customerBody.color = Color.white;
+            }
+            for (var i = 0; i < placeholderShapes.Length; i++)
+                if (placeholderShapes[i] != null) placeholderShapes[i].SetActive(portrait == null);
+
+            if (petBody == null) return;
+            var icon = order.Pet == null ? null : order.Pet.Icon;
+            petBody.sprite = icon;
+            petBody.preserveAspect = icon != null;
+            petBody.color = icon == null ? defaultPetColor : Color.white;
+        }
+
+        /// <summary>기분에 맞춰 손님 표정을 바꿉니다.</summary>
+        public void SetMood(CustomerMood mood)
+        {
+            if (customerBody == null || portraitSource == null) return;
+            var portrait = portraitSource.PortraitFor(mood);
+            if (portrait == null || ReferenceEquals(portrait, appliedPortrait)) return;
+            appliedPortrait = portrait;
+            customerBody.sprite = portrait;
+        }
+
+        public void Configure(RectTransform customer, RectTransform carrier, RectTransform deskAnchor, Image body, Image pet, GameObject[] placeholders = null)
+        {
+            placeholderShapes = placeholders ?? new GameObject[0];
             customerRoot = customer;
             carrierRoot = carrier;
             deskPetAnchor = deskAnchor;

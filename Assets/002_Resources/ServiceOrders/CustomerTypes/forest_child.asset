@@ -10,32 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bde884471a454344bba1719d2c9ad15b, type: 3}
-  m_Name: resident
+  m_Name: forest_child
   m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Customers.CustomerTypeDefinition
-  customerTypeId: resident
-  displayName: "\uC77C\uBC18 \uC8FC\uBBFC"
+  customerTypeId: forest_child
+  displayName: "\uC232\uC758 \uC544\uC774"
   archetype: 0
-  portrait: {fileID: 21300000, guid: 7b563bfb7b671034bbb093614e2d57db, type: 3}
-  portraitUneasy: {fileID: 21300000, guid: b38690b8832aa324a909cc55aace0822, type: 3}
-  portraitUpset: {fileID: 21300000, guid: b9891d3455c3c24438bfcadac0047fca, type: 3}
+  portrait: {fileID: 21300000, guid: 24d918ab443fe864899a802ae821c831, type: 3}
+  portraitUneasy: {fileID: 21300000, guid: bc31c99357df5ae4880a17b77d2ca1ec, type: 3}
+  portraitUpset: {fileID: 21300000, guid: 66a485cbc2157d947a0d28554e030f63, type: 3}
   visualPrefab: {fileID: 0}
-  characterName: "\uBBF8\uB85C"
-  tagline: "\uB2F9\uADFC \uAC00\uBC29\uC744 \uBA58 \uB9C8\uC744 \uD1A0\uB07C"
+  characterName: "\uC774\uC5D4"
+  tagline: "\uC78E\uC0AC\uADC0 \uC637\uC744 \uC785\uC740 \uC232\uC758 \uC544\uC774"
   visitGreetings:
-  - "\uC800\u2026 \uC5EC\uAE30 \uCC98\uC74C\uC774\uC5D0\uC694. {pet}\uC774(\uAC00)
-    {clue}. \uC870\uC2EC\uD788 \uBD10\uC8FC\uC138\uC694."
-  - "\uC9C0\uB09C\uBC88\uC5D0 \uC548 \uC544\uD320\uB300\uC694! \uADF8\uB798\uC11C
-    \uB610 \uC654\uC5B4\uC694. {pet}\uC774(\uAC00) {clue}."
-  returningHappyLine: "{pet}\uC774(\uAC00) \uC5EC\uAE30 \uC624\uB294 \uB0A0\uC744
-    \uC54C\uC544\uCC44\uC694. \uC624\uB298\uC740 {clue}."
-  returningUpsetLine: "{pet}\uC774(\uAC00) \uC870\uAE08 \uBB34\uC11C\uC6CC\uD574\uC694.
-    \uC774\uBC88\uC5D4 \uC0B4\uC0B4 \uBD80\uD0C1\uB4DC\uB824\uC694. {clue}."
+  - "\uC232\uC774 \uC5EC\uAE30\uB97C \uC54C\uB824\uC92C\uC5B4\uC694. {pet}\uC774(\uAC00)
+    {clue}."
+  - "\uB610 \uC654\uC5B4\uC694. \uC232\uC774 \uC88B\uC544\uD588\uAC70\uB4E0\uC694.
+    {pet}\uC774(\uAC00) {clue}."
+  returningHappyLine: "{pet}\uC774(\uAC00) \uC5EC\uAE30 \uB0C4\uC0C8\uB97C \uC88B\uC544\uD574\uC694.
+    \uC624\uB298\uC740 {clue}."
+  returningUpsetLine: "\uC232\uC774 \uC870\uAE08 \uC11C\uC6B4\uD574\uD588\uC5B4\uC694.
+    \uB2E4\uC2DC \uBD80\uD0C1\uD574\uC694. {clue}."
   appearanceWeight: 1
   minimumRequiredRequests: 1
   maximumRequiredRequests: 2
   minimumOptionalCare: 0
   maximumOptionalCare: 1
-  elementalPetChance: 0.15
+  elementalPetChance: 0.45
   rareByproductChance: 0.05
   economyTierId: standard
   conditionPreferences:

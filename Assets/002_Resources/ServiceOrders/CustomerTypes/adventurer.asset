@@ -15,8 +15,24 @@ MonoBehaviour:
   customerTypeId: adventurer
   displayName: "\uBAA8\uD5D8\uAC00"
   archetype: 1
-  portrait: {fileID: 0}
+  portrait: {fileID: 21300000, guid: 498f2937eb7e9ae4ab1ac36128a2834f, type: 3}
+  portraitUneasy: {fileID: 21300000, guid: cc51cd4227a8e9d43aefb000e9017455, type: 3}
+  portraitUpset: {fileID: 21300000, guid: ea7ba677d70f40449b1f7a44725ceee9, type: 3}
   visualPrefab: {fileID: 0}
+  characterName: "\uB9AC\uC548"
+  tagline: "\uAD6D\uACBD \uB108\uBA38\uB97C \uB3C4\uB294 \uC6A9\uC778\uC871 \uBAA8\uD5D8\uAC00"
+  visitGreetings:
+  - "\uC548\uB155\uD558\uC138\uC694. \uC18C\uBB38 \uB4E3\uACE0 \uC654\uC5B4\uC694.
+    {pet}\uC774(\uAC00) {clue}. \uBD10\uC8FC\uC2E4 \uC218 \uC788\uB098\uC694?"
+  - "\uB610 \uC654\uC5B4\uC694. \uC9C0\uB09C\uBC88\uC5D0 {pet}\uC774(\uAC00) \uB208\uC5D0
+    \uB744\uAC8C \uC88B\uC544\uC838\uC11C\uC694. \uC774\uBC88\uC5D4 {clue}."
+  - "\uC774\uC81C \uC5EC\uAE30 \uB9D0\uACE0\uB294 \uC548 \uB9E1\uACA8\uC694. {pet}\uC774(\uAC00)
+    {clue}."
+  returningHappyLine: "\uC9C0\uB09C\uBC88 \uADF8 \uC190\uAE38, {pet}\uC774(\uAC00)
+    \uC544\uC9C1\uB3C4 \uAE30\uC5B5\uD574\uC694. \uC624\uB298\uC740 {clue}."
+  returningUpsetLine: "\uC9C0\uB09C\uBC88\uC5D4 \uC880 \uC544\uC26C\uC6E0\uC5B4\uC694.
+    \uC774\uBC88\uC5D4 \uC798 \uBD80\uD0C1\uB4DC\uB9B4\uAC8C\uC694. {pet}\uC774(\uAC00)
+    {clue}."
   appearanceWeight: 1
   minimumRequiredRequests: 2
   maximumRequiredRequests: 3
