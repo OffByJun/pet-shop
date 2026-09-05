@@ -14,6 +14,10 @@ namespace _001_Scripts.Data
         public IReadOnlyList<string> Byproducts => byproducts;
         public int RemainingCount { get; private set; }
         public bool IsCompleted => RemainingCount == 0;
+        public void RecordByproduct(string description)
+        {
+            if (!string.IsNullOrWhiteSpace(description)) byproducts.Add(description);
+        }
 
         public CareSession(IReadOnlyList<CareConditionState> initialConditions)
         {
@@ -41,14 +45,18 @@ namespace _001_Scripts.Data
 
             if (condition.Care == CareKind.Wash && tool == CareToolKind.Sprayer)
             {
-                condition.ApplyWater(distance / 380f);
+                condition.ApplyWater(distance / 520f);
                 return new CareInteractionResult(CareInteractionStatus.Wetting, condition);
             }
             if (condition.NeedsWater && tool == CareToolKind.WashBrush && condition.Wetness < 1f)
                 return new CareInteractionResult(CareInteractionStatus.NeedsWater, condition);
 
+            var previousPasses = condition.CompletedPasses;
             var resolved = condition.ApplyProgress(distance / CareToolRules.Effort(tool));
-            if (!resolved) return new CareInteractionResult(CareInteractionStatus.Progressed, condition);
+            if (!resolved)
+                return new CareInteractionResult(condition.CompletedPasses > previousPasses
+                    ? CareInteractionStatus.StageCompleted
+                    : CareInteractionStatus.Progressed, condition);
             RegisterResolved(condition);
             return new CareInteractionResult(CareInteractionStatus.Resolved, condition);
         }

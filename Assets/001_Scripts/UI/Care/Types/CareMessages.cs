@@ -10,7 +10,7 @@ using _001_Scripts.Data.Tools;
 
 namespace _001_Scripts.Core.Pipes.Msgs
 {
-    public enum CareInput { SelectTool, SelectCondition, Reset, Stroke }
+    public enum CareInput { SelectTool, SelectCondition, Reset, Inspect, Stroke, EventChoice }
 
     public readonly struct CareInputRequest : IPipeMsg
     {
@@ -18,13 +18,16 @@ namespace _001_Scripts.Core.Pipes.Msgs
         public readonly CareInput Input;
         public readonly int Index;
         public readonly float Amount;
+        public readonly UnityEngine.Vector2 ScreenPosition;
 
-        public CareInputRequest(UnityEngine.Object source, CareInput input, int index, float amount)
+        public CareInputRequest(UnityEngine.Object source, CareInput input, int index, float amount,
+            UnityEngine.Vector2 screenPosition = default)
         {
             Source = source;
             Input = input;
             Index = index;
             Amount = amount;
+            ScreenPosition = screenPosition;
         }
     }
 }

@@ -8,10 +8,10 @@ namespace _001_Scripts.Data
     {
         public static float Effort(CareToolKind tool) => tool switch
         {
-            CareToolKind.Medicine => 300f,
-            CareToolKind.Tweezers => 240f,
-            CareToolKind.Scissors => 320f,
-            _ => 420f
+            CareToolKind.Medicine => 420f,
+            CareToolKind.Tweezers => 360f,
+            CareToolKind.Scissors => 480f,
+            _ => 540f
         };
     }
 }

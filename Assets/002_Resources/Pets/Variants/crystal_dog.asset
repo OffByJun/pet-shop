@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1161aad14d4984d90da877b4010118, type: 3}
+  m_Name: crystal_dog
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Pets.PetVariantDefinition
+  variantId: crystal_dog
+  displayName: "\uBE5B\uB098\uB294 \uC5BC\uC74C\uACB0\uC815 \uD3EC\uBA54\uB77C\uB2C8\uC548"
+  description: "\uD138 \uC0AC\uC774\uB85C \uC5BC\uC74C\uACB0\uC815\uC774 \uC790\uB77C\uB098\uB294
+    \uD3EC\uBA54\uB77C\uB2C8\uC548\uC785\uB2C8\uB2E4. \uACB0\uC815\uC774 \uACFC\uD558\uAC8C
+    \uC790\uB77C\uBA74 \uC190\uC9C8\uC774 \uD544\uC694\uD574\uC694."
+  icon: {fileID: 21300000, guid: addfbcf81aac0b74c9fa83e97e3699e7, type: 3}
+  baseAnimal: {fileID: 11400000, guid: 2ac6ac9119fe83d48891eee4ca8dde62, type: 2}
+  attribute: {fileID: 11400000, guid: 51083a0fc5e3e91428f26840f1399315, type: 2}
+  requiredProgressionContentId: 
+  byproducts:
+  - CareAction: 5
+    Item: {fileID: 11400000, guid: 84b40ef36616c4a45811f940435be2f4, type: 2}
+    MinAmount: 1
+    MaxAmount: 2
+    Chance: 1

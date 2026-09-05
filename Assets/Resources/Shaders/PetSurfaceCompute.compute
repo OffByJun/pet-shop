@@ -1,0 +1,115 @@
+// 펫 표면 시뮬레이션입니다.
+//   R = 오염   G = 젖음   B = 털 정돈도   A = 거품
+#pragma kernel CSClear
+#pragma kernel CSApplyTools
+#pragma kernel CSReduce
+
+struct ToolInteraction
+{
+    float2 uv;
+    float  radius;
+    float  strength;
+    float2 direction;
+    uint   type;      // 0 물 · 1 비누 · 2 브러시 · 3 수건 · 4 손질
+    uint   pad;
+};
+
+RWTexture2D<float4> _Surface;
+StructuredBuffer<ToolInteraction> _Tools;
+StructuredBuffer<float4> _Zones;          // xy = 좌하단 UV, zw = 크기
+RWStructuredBuffer<float4> _ZoneResults;  // 구역별 평균 (오염, 젖음, 정돈, 거품)
+
+uint  _ToolCount;
+uint  _ZoneCount;
+uint  _Resolution;
+float _Delta;
+float _StartingDirt;
+float _StartingFurOrder;
+
+[numthreads(8, 8, 1)]
+void CSClear(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _Resolution || id.y >= _Resolution) return;
+    _Surface[id.xy] = float4(_StartingDirt, 0.0, _StartingFurOrder, 0.0);
+}
+
+[numthreads(8, 8, 1)]
+void CSApplyTools(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _Resolution || id.y >= _Resolution) return;
+
+    float2 uv = (float2(id.xy) + 0.5) / (float)_Resolution;
+    float4 s = _Surface[id.xy];
+
+    // 한 프레임에 쌓인 접촉을 한 번의 디스패치에서 모두 처리합니다.
+    for (uint i = 0; i < _ToolCount; i++)
+    {
+        ToolInteraction tool = _Tools[i];
+        float radius = max(tool.radius, 1e-4);
+        float falloff = 1.0 - smoothstep(radius * 0.30, radius, length(uv - tool.uv));
+        float amount = falloff * tool.strength;
+        if (amount <= 0.0) continue;
+
+        if (tool.type == 0)          // 물: 적시고 헹궈 냅니다.
+        {
+            s.g = saturate(s.g + amount);
+            s.r = saturate(s.r - amount * 0.10);
+            s.a = saturate(s.a - amount * 0.55);
+        }
+        else if (tool.type == 1)     // 비누: 젖은 곳에만 거품이 섭니다.
+        {
+            s.a = saturate(s.a + amount * saturate(s.g * 1.4));
+        }
+        else if (tool.type == 2)     // 브러시: 젖고 거품 낸 곳일수록 잘 지워집니다.
+        {
+            float power = 0.25 + s.g * 0.45 + s.a * 0.60;
+            s.r = saturate(s.r - amount * power);
+            s.a = saturate(s.a - amount * 0.30);
+            float align = dot(normalize(tool.direction + 1e-6), float2(1.0, 0.0));
+            s.b = saturate(s.b + amount * align * 0.9);
+        }
+        else if (tool.type == 3)     // 수건: 물기를 걷어 냅니다.
+        {
+            s.g = saturate(s.g - amount * 0.9);
+            s.a = saturate(s.a - amount * 0.4);
+        }
+        else                         // 손질: 헝클어진 결을 정돈합니다.
+        {
+            s.b = saturate(s.b + amount * 0.7);
+        }
+    }
+
+    // 시간이 지나면 물기와 거품이 스스로 마릅니다.
+    s.g = saturate(s.g - _Delta * 0.030);
+    s.a = saturate(s.a - _Delta * 0.015);
+    _Surface[id.xy] = s;
+}
+
+// 구역별 평균을 GPU에서 바로 냅니다. CPU로는 이 작은 버퍼만 넘어갑니다.
+[numthreads(64, 1, 1)]
+void CSReduce(uint3 id : SV_DispatchThreadID)
+{
+    if (id.x >= _ZoneCount) return;
+
+    float4 zone = _Zones[id.x];
+    uint x0 = (uint)clamp(zone.x * _Resolution, 0.0, _Resolution - 1.0);
+    uint y0 = (uint)clamp(zone.y * _Resolution, 0.0, _Resolution - 1.0);
+    uint x1 = (uint)clamp((zone.x + zone.z) * _Resolution, 1.0, (float)_Resolution);
+    uint y1 = (uint)clamp((zone.y + zone.w) * _Resolution, 1.0, (float)_Resolution);
+    if (x1 <= x0) x1 = x0 + 1;
+    if (y1 <= y0) y1 = y0 + 1;
+
+    // 한 스레드가 도는 표본을 32×32로 묶어, 넓은 구역도 비용이 일정합니다.
+    uint stepX = max(1u, (x1 - x0) / 32u);
+    uint stepY = max(1u, (y1 - y0) / 32u);
+
+    float4 sum = 0.0;
+    uint count = 0;
+    for (uint y = y0; y < y1; y += stepY)
+    for (uint x = x0; x < x1; x += stepX)
+    {
+        sum += _Surface[uint2(x, y)];
+        count++;
+    }
+    _ZoneResults[id.x] = count == 0 ? 0.0 : sum / (float)count;
+}

@@ -35,7 +35,10 @@ namespace _001_Scripts.UI.UILib
             CareInteractionStatus.Wetting => "진흙을 물로 충분히 적시는 중입니다.",
             CareInteractionStatus.NeedsWater => "마른 진흙이에요. 물뿌리개로 먼저 적셔 주세요.",
             CareInteractionStatus.Progressed =>
-                $"{result.Condition.Name} 처리 중 · 남은 진행도 {UnityEngine.Mathf.CeilToInt(result.Condition.Remaining * 100)}%",
+                $"{result.Condition.Name} · {result.Condition.CurrentStageName} " +
+                $"{UnityEngine.Mathf.CeilToInt(result.Condition.Progress01 * 100)}%",
+            CareInteractionStatus.StageCompleted =>
+                $"{result.Condition.Name} 단계 완료! 다음은 {result.Condition.CurrentStageName}입니다.",
             CareInteractionStatus.Resolved when !string.IsNullOrWhiteSpace(result.Condition.Byproduct) =>
                 $"{result.Condition.Name} 해결! 부산물: {result.Condition.Byproduct}",
             CareInteractionStatus.Resolved => $"{result.Condition.Name} 해결!",

@@ -8,7 +8,7 @@ namespace _001_Scripts.Data
 
     public enum CareToolKind { Sprayer, WashBrush, Comb, Medicine, Tweezers, Scissors }
 
-    public enum CareInteractionStatus { WrongTool, Wetting, NeedsWater, Progressed, Resolved }
+    public enum CareInteractionStatus { WrongTool, Wetting, NeedsWater, Progressed, StageCompleted, Resolved }
 
     public readonly struct CareInteractionResult
     {
