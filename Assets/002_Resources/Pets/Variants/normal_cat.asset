@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: normal_cat
   m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Pets.PetVariantDefinition
   variantId: normal_cat
-  displayName: "\uACE0\uC591\uC774"
-  description: 
-  icon: {fileID: 0}
+  displayName: "\uC0B4\uAD6C\uBE5B \uB9AC\uBCF8 \uACE0\uC591\uC774"
+  description: "\uC0B4\uAD6C\uBE5B \uC5BC\uB8E9\uACFC \uD48D\uC131\uD55C \uAF2C\uB9AC\uAC00
+    \uB9E4\uB825\uC801\uC778 \uD638\uAE30\uC2EC \uB9CE\uC740 \uACE0\uC591\uC774\uC608\uC694."
+  icon: {fileID: 21300000, guid: 45d2944f6e609014aa9e14648744f079, type: 3}
   baseAnimal: {fileID: 11400000, guid: 324742e5322b9ad48b5694b610376834, type: 2}
   attribute: {fileID: 11400000, guid: 774f2231480d5b9409498d527468fcbf, type: 2}
+  requiredProgressionContentId: 
   byproducts:
   - CareAction: 1
     Item: {fileID: 11400000, guid: 923c998c4e4103547b9026939929ef6a, type: 2}

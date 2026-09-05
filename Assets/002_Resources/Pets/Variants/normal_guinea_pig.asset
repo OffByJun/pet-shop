@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: normal_guinea_pig
   m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Pets.PetVariantDefinition
   variantId: normal_guinea_pig
-  displayName: "\uAE30\uB2C8\uD53C\uADF8"
-  description: 
-  icon: {fileID: 0}
+  displayName: "\uAF43\uBC2D \uAE30\uB2C8\uD53C\uADF8"
+  description: "\uC138 \uAC00\uC9C0 \uD138\uBE5B\uACFC \uC791\uC740 \uAF43 \uC7A5\uC2DD\uC774
+    \uC5B4\uC6B8\uB9AC\uB294 \uCC28\uBD84\uD55C \uAE30\uB2C8\uD53C\uADF8\uC608\uC694."
+  icon: {fileID: 21300000, guid: 239957951a440a04b81fb9884f0a5226, type: 3}
   baseAnimal: {fileID: 11400000, guid: 474d93b1e6cde8a4dbbbbd7d6c841b31, type: 2}
   attribute: {fileID: 11400000, guid: 774f2231480d5b9409498d527468fcbf, type: 2}
+  requiredProgressionContentId: 
   byproducts:
   - CareAction: 1
     Item: {fileID: 11400000, guid: 6a663e2006bde4e40a055a6aba07b97a, type: 2}

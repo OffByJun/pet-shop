@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: normal_parrot
   m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Pets.PetVariantDefinition
   variantId: normal_parrot
-  displayName: "\uC575\uBB34\uC0C8"
-  description: 
-  icon: {fileID: 0}
+  displayName: "\uBBFC\uD2B8\uB0A0\uAC1C \uC575\uBB34\uC0C8"
+  description: "\uBBFC\uD2B8\uBE5B \uB0A0\uAC1C\uC640 \uBCF5\uC22D\uC544\uBE5B \uAC00\uC2B4\uC744
+    \uAC00\uC9C4 \uC601\uB9AC\uD558\uACE0 \uC218\uB2E4\uC2A4\uB7EC\uC6B4 \uC575\uBB34\uC0C8\uC608\uC694."
+  icon: {fileID: 21300000, guid: 72286ab1108c72c468232678733ea26c, type: 3}
   baseAnimal: {fileID: 11400000, guid: c4250817bef671d4497a9aa93f829fba, type: 2}
   attribute: {fileID: 11400000, guid: 774f2231480d5b9409498d527468fcbf, type: 2}
+  requiredProgressionContentId: 
   byproducts:
   - CareAction: 1
     Item: {fileID: 11400000, guid: 65935ffe794a6ef4bac40a8555157b71, type: 2}

@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: normal_rabbit
   m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Pets.PetVariantDefinition
   variantId: normal_rabbit
-  displayName: "\uD1A0\uB07C"
-  description: 
-  icon: {fileID: 0}
+  displayName: "\uB2EC\uADC0 \uD1A0\uB07C"
+  description: "\uCEE4\uB2E4\uB780 \uBCF4\uB78F\uBE5B \uADC0\uB85C \uC791\uC740 \uC18C\uB9AC\uAE4C\uC9C0
+    \uB4E3\uB294 \uC21C\uD55C \uD1A0\uB07C\uC608\uC694."
+  icon: {fileID: 21300000, guid: 84fa700be9391154c8a0411d0826d063, type: 3}
   baseAnimal: {fileID: 11400000, guid: 21246b0d35aabb3498cca151f93e55cd, type: 2}
   attribute: {fileID: 11400000, guid: 774f2231480d5b9409498d527468fcbf, type: 2}
+  requiredProgressionContentId: 
   byproducts:
   - CareAction: 1
     Item: {fileID: 11400000, guid: 67e6ebeecc857664abeefe67ebd5f279, type: 2}
