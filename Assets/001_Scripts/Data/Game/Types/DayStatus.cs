@@ -6,6 +6,8 @@ namespace _001_Scripts.Data
         CustomerArrived,
         PetInCare,
         CustomerSettlement,
-        EndOfDaySettlement
+        EndOfDaySettlement,
+        AwaitingPayment,
+        WaitingForClose
     }
 }

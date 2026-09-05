@@ -1,0 +1,213 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c990a21be23f43e40a140568f368ea97, type: 3}
+  m_Name: ShopRoutineSettings
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.ShopRoutineSettings
+  mainMenuScene: MainMenuScene
+  routineScene: ShopRoutineScene
+  receptionScene: CustomerReceptionScene
+  careScene: CarePlayScene
+  baseStorageCapacity: 24
+  careDurationMultiplier: 1.35
+  minimumCareRequestsPerVisit: 3
+  maximumCareRequestsPerVisit: 5
+  careRules:
+  - condition: {fileID: 11400000, guid: c4d213f45b3fb6d408cd7cd72db67823, type: 2}
+    presentationKind: 0
+    zone:
+      serializedVersion: 2
+      x: 0.407
+      y: 0.593
+      width: 0.186
+      height: 0.233
+    tool: 1
+    needsWater: 1
+    effort: 420
+    waterEffort: 380
+    domainTool: {fileID: 11400000, guid: 6773fc618763b804d970c649f68180aa, type: 2}
+    supply: {fileID: 11400000, guid: eca7039d1f8a0eb43a18f123c137f4f6, type: 2}
+    supplyCost: 1
+  - condition: {fileID: 11400000, guid: bac34985d2838ba45bff99bb4e3bb0c4, type: 2}
+    presentationKind: 0
+    zone:
+      serializedVersion: 2
+      x: 0.407
+      y: 0.593
+      width: 0.186
+      height: 0.233
+    tool: 1
+    needsWater: 1
+    effort: 420
+    waterEffort: 380
+    domainTool: {fileID: 11400000, guid: 6f058e69078c3d14eb0018697471c0db, type: 2}
+    supply: {fileID: 11400000, guid: eca7039d1f8a0eb43a18f123c137f4f6, type: 2}
+    supplyCost: 1
+  - condition: {fileID: 11400000, guid: 0c6d331fcf2f29448860e04e2745b9cc, type: 2}
+    presentationKind: 2
+    zone:
+      serializedVersion: 2
+      x: 0.523
+      y: 0.798
+      width: 0.079
+      height: 0.121
+    tool: 3
+    needsWater: 0
+    effort: 420
+    waterEffort: 380
+    domainTool: {fileID: 11400000, guid: cfbc16a2f30735043b78e0b509a0f4d6, type: 2}
+    supply: {fileID: 11400000, guid: 1fa02d7a85ebbda45b922ed6ad99e0e1, type: 2}
+    supplyCost: 1
+  - condition: {fileID: 11400000, guid: 21c6b4b4c9dfd77499b2fe1d80252a1c, type: 2}
+    presentationKind: 1
+    zone:
+      serializedVersion: 2
+      x: 0.477
+      y: 0.202
+      width: 0.139
+      height: 0.14
+    tool: 2
+    needsWater: 0
+    effort: 420
+    waterEffort: 380
+    domainTool: {fileID: 11400000, guid: fdd67f9e1339bc044b3bae3dd24ec2b9, type: 2}
+    supply: {fileID: 0}
+    supplyCost: 0
+  - condition: {fileID: 11400000, guid: b9fad18109be8fd4e996a2cf66e6be1f, type: 2}
+    presentationKind: 3
+    zone:
+      serializedVersion: 2
+      x: 0.491
+      y: 0.277
+      width: 0.112
+      height: 0.14
+    tool: 4
+    needsWater: 0
+    effort: 420
+    waterEffort: 380
+    domainTool: {fileID: 11400000, guid: 7a7e3da1ae56ed643bb539b0692ab5b1, type: 2}
+    supply: {fileID: 11400000, guid: 23aaf35e9d0a1b947a52c5f92ceeff88, type: 2}
+    supplyCost: 1
+  - condition: {fileID: 11400000, guid: fc0bb560deb511845a8745a377ff35d3, type: 2}
+    presentationKind: 3
+    zone:
+      serializedVersion: 2
+      x: 0.314
+      y: 0.13
+      width: 0.105
+      height: 0.222
+    tool: 4
+    needsWater: 0
+    effort: 420
+    waterEffort: 380
+    domainTool: {fileID: 11400000, guid: 4e8caeb9b94dda6498696bc3834a4a28, type: 2}
+    supply: {fileID: 11400000, guid: 23aaf35e9d0a1b947a52c5f92ceeff88, type: 2}
+    supplyCost: 1
+  - condition: {fileID: 11400000, guid: 28b707b63f0ecdb42a92415e0f4adb2f, type: 2}
+    presentationKind: 4
+    zone:
+      serializedVersion: 2
+      x: 0.314
+      y: 0.481
+      width: 0.099
+      height: 0.335
+    tool: 5
+    needsWater: 0
+    effort: 420
+    waterEffort: 380
+    domainTool: {fileID: 11400000, guid: dc14f964e05e59b46be6adfec7953e79, type: 2}
+    supply: {fileID: 11400000, guid: 98a1a2928e51b5e4f885db29777f4c44, type: 2}
+    supplyCost: 1
+  - condition: {fileID: 11400000, guid: a65b5f88cdd1a2642a643f92d9c83917, type: 2}
+    presentationKind: 4
+    zone:
+      serializedVersion: 2
+      x: 0.638
+      y: 0.858
+      width: 0.084
+      height: 0.084
+    tool: 5
+    needsWater: 0
+    effort: 420
+    waterEffort: 380
+    domainTool: {fileID: 11400000, guid: 427950d7b5e4c924cac83d0233f49219, type: 2}
+    supply: {fileID: 11400000, guid: 98a1a2928e51b5e4f885db29777f4c44, type: 2}
+    supplyCost: 1
+  decorations:
+  - {fileID: 11400000, guid: 2fc751815829c1e4ea30bad80eebb646, type: 2}
+  - {fileID: 11400000, guid: cd3faa80abe9f934b8263c04c2aca253, type: 2}
+  - {fileID: 11400000, guid: 0c82cd2402ca2194f8d375cd895b9012, type: 2}
+  supplies:
+  - {fileID: 11400000, guid: eca7039d1f8a0eb43a18f123c137f4f6, type: 2}
+  - {fileID: 11400000, guid: 1fa02d7a85ebbda45b922ed6ad99e0e1, type: 2}
+  - {fileID: 11400000, guid: 23aaf35e9d0a1b947a52c5f92ceeff88, type: 2}
+  - {fileID: 11400000, guid: 98a1a2928e51b5e4f885db29777f4c44, type: 2}
+  careQualityTiers:
+  - label: "D \xB7 \uCCAB\uAC78\uC74C"
+    minimumBestCombo: 0
+    payoutMultiplier: 1
+  - label: "C \xB7 \uB530\uB73B\uD55C \uC190\uAE38"
+    minimumBestCombo: 4
+    payoutMultiplier: 1.1
+  - label: "B \xB7 \uB2A5\uC219\uD55C \uB3CC\uBD04"
+    minimumBestCombo: 8
+    payoutMultiplier: 1.25
+  - label: "A \xB7 \uD658\uC0C1\uC758 \uC190\uAE38"
+    minimumBestCombo: 12
+    payoutMultiplier: 1.45
+  - label: "S \xB7 \uBC18\uC9DD \uCF00\uC5B4"
+    minimumBestCombo: 16
+    payoutMultiplier: 1.7
+  inspectStamina: 140
+  inspectWarmRadius: 0.3
+  inspectHotRadius: 0.085
+  inspectStaminaCost: 26
+  inspectConfidenceRate: 1.35
+  inspectConfidenceDecay: 0.9
+  dailyGoalBase: 260
+  dailyGoalGrowth: 60
+  goalHitReputation: 3
+  goalMissReputation: -3
+  goalMissFeeRatio: 0.5
+  bondTiers:
+  - label: "\uCCAB \uBC29\uBB38"
+    minimumVisits: 0
+    minimumHappyVisits: 0
+    tipRatio: 0
+  - label: "\uC5BC\uAD74 \uC775\uC740 \uC190\uB2D8"
+    minimumVisits: 2
+    minimumHappyVisits: 1
+    tipRatio: 0.08
+  - label: "\uB2E8\uACE8"
+    minimumVisits: 4
+    minimumHappyVisits: 3
+    tipRatio: 0.18
+  - label: "\uC6B0\uB9AC \uAC00\uAC8C \uC0AC\uB78C"
+    minimumVisits: 7
+    minimumHappyVisits: 5
+    tipRatio: 0.3
+  reputationPerPerfectOrder: 3
+  reputationPerCompletedOrder: 1
+  reputationPerFailedOrder: -2
+  reputationPerUnservedOrder: -1
+  reputationTiers:
+  - title: "\uB3D9\uB124 \uC2E0\uCC38"
+    minimumPoints: 0
+    extraCustomers: 0
+  - title: "\uC785\uC18C\uBB38 \uB098\uB294 \uAC00\uAC8C"
+    minimumPoints: 8
+    extraCustomers: 1
+  - title: "\uC778\uAE30 \uD3AB\uC0F5"
+    minimumPoints: 20
+    extraCustomers: 2
+  - title: "\uBA85\uC131 \uC788\uB294 \uD3AB\uC0F5"
+    minimumPoints: 40
+    extraCustomers: 3

@@ -68,6 +68,7 @@ namespace _001_Scripts.Managers
         public IReadOnlyList<ItemStack> Stacks => stacks;
         public int Capacity => capacity;
         public int Balance => balance;
+        public void SetCapacity(int value) => capacity = Mathf.Max(stacks.Count, Mathf.Max(1, value));
 
         public bool TryGrant(ItemBase item, int amount) => TryAdd(item, amount);
 

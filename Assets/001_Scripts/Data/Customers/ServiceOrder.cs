@@ -20,6 +20,12 @@ namespace _001_Scripts.Data.Customers
         public IReadOnlyList<ServiceRequestState> RequiredRequests => requiredRequests;
         public IReadOnlyList<ServiceRequestState> OptionalRequests => optionalRequests;
         public ServiceOrderStatus Status { get; private set; } = ServiceOrderStatus.Active;
+        /// <summary>케어 솜씨 배율입니다. 1이 기본이고 잘할수록 커집니다.</summary>
+        public float CareQuality { get; private set; } = 1f;
+        /// <summary>손님과의 관계로 붙는 팁 배율입니다. 0이면 팁 없음입니다.</summary>
+        public float RelationshipTip { get; private set; }
+        /// <summary>정산 화면에 보여 줄 케어 등급 이름입니다.</summary>
+        public string CareGrade { get; private set; } = string.Empty;
         public ServiceOrderCompletion Completion { get; private set; }
         public ServiceReward? Reward => Completion == null ? null : Completion.Reward;
         public bool IsFinalized => Status != ServiceOrderStatus.Active;
@@ -42,6 +48,20 @@ namespace _001_Scripts.Data.Customers
             AddRequests(required, ServiceRequestKind.Required);
             AddRequests(optional, ServiceRequestKind.Optional);
             if (RequiredCount == 0) throw new ArgumentException("A service order requires at least one required condition.");
+        }
+
+        /// <summary>케어가 끝난 뒤 그 결과를 주문에 기록합니다. 정산 전에만 반영됩니다.</summary>
+        public void RecordCareResult(float quality, string grade)
+        {
+            if (IsFinalized) return;
+            CareQuality = Math.Clamp(quality, 0f, 4f);
+            CareGrade = grade ?? string.Empty;
+        }
+
+        public void RecordRelationshipTip(float multiplier)
+        {
+            if (IsFinalized) return;
+            RelationshipTip = Math.Clamp(multiplier, 0f, 2f);
         }
 
         public int RequiredCount => Count(ServiceRequestKind.Required, false);

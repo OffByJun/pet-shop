@@ -13,15 +13,24 @@ namespace _001_Scripts.Managers
         private readonly ServiceOrderCatalog catalog;
         private readonly IServiceOrderRandom random;
         private readonly Func<string, bool> isContentUnlocked;
+        private readonly Func<PetConditionDefinition, bool> conditionSupported;
+        private readonly int minimumCareRequests;
+        private readonly int maximumCareRequests;
 
         public ServiceOrderGenerator(
             ServiceOrderCatalog catalog,
             IServiceOrderRandom random = null,
-            Func<string, bool> isContentUnlocked = null)
+            Func<string, bool> isContentUnlocked = null,
+            Func<PetConditionDefinition, bool> conditionSupported = null,
+            int minimumCareRequests = 3,
+            int maximumCareRequests = 5)
         {
             this.catalog = catalog ?? throw new ArgumentNullException(nameof(catalog));
             this.random = random ?? new UnityServiceOrderRandom();
             this.isContentUnlocked = isContentUnlocked;
+            this.conditionSupported = conditionSupported;
+            this.minimumCareRequests = Math.Max(1, minimumCareRequests);
+            this.maximumCareRequests = Math.Max(this.minimumCareRequests, maximumCareRequests);
         }
 
         public ServiceOrder CreateOrder(CustomerTypeDefinition customer = null)
@@ -32,10 +41,17 @@ namespace _001_Scripts.Managers
             if (pool.Count == 0) throw new InvalidOperationException("No pet conditions are configured for this customer.");
 
             var requiredCount = random.Range(customer.MinimumRequiredRequests, customer.MaximumRequiredRequests + 1);
+            requiredCount = Math.Max(requiredCount, Math.Min(2, pool.Count));
             requiredCount = Math.Min(requiredCount, pool.Count);
+            // maximumCareRequests is a hard ceiling: the care screen can only show that many rows,
+            // and a request it cannot show would make the order impossible to complete.
+            requiredCount = Math.Max(1, Math.Min(requiredCount, maximumCareRequests));
             var required = DrawUnique(pool, requiredCount);
             var optionalCount = random.Range(customer.MinimumOptionalCare, customer.MaximumOptionalCare + 1);
-            optionalCount = Math.Min(optionalCount, pool.Count);
+            var targetTotal = random.Range(minimumCareRequests, maximumCareRequests + 1);
+            optionalCount = Math.Max(optionalCount, targetTotal - required.Count);
+            optionalCount = Math.Min(optionalCount, maximumCareRequests - required.Count);
+            optionalCount = Math.Max(0, Math.Min(optionalCount, pool.Count));
             var optional = DrawUnique(pool, optionalCount);
             return new ServiceOrder(customer, pet, required, optional, catalog.PerfectOptionalCompletionRatio);
         }
@@ -89,17 +105,24 @@ namespace _001_Scripts.Managers
             var preferences = customer.ConditionPreferences;
             for (var i = 0; i < preferences.Count; i++)
                 if (preferences[i].Condition != null && preferences[i].Weight > 0f &&
-                    IsAvailable(preferences[i].Condition.RequiredProgressionContentId))
+                    IsAvailable(preferences[i].Condition.RequiredProgressionContentId) && IsSupported(preferences[i].Condition))
                     result.Add(new WeightedCondition(preferences[i].Condition, preferences[i].Weight));
-            if (result.Count > 0) return result;
             var conditions = catalog.Conditions;
             for (var i = 0; i < conditions.Count; i++)
-                if (conditions[i] != null && IsAvailable(conditions[i].RequiredProgressionContentId))
-                    result.Add(new WeightedCondition(conditions[i], 1f));
+                if (conditions[i] != null && IsAvailable(conditions[i].RequiredProgressionContentId) &&
+                    IsSupported(conditions[i]) && !ContainsCategory(result, conditions[i].Category))
+                    result.Add(new WeightedCondition(conditions[i], result.Count == 0 ? 1f : .35f));
             return result;
         }
 
+        private static bool ContainsCategory(List<WeightedCondition> pool, PetConditionCategory category)
+        {
+            for (var i = 0; i < pool.Count; i++) if (pool[i].Condition.Category == category) return true;
+            return false;
+        }
+
         private bool IsAvailable(string contentId) => isContentUnlocked == null || isContentUnlocked(contentId);
+        private bool IsSupported(PetConditionDefinition condition) => conditionSupported == null || conditionSupported(condition);
 
         private List<PetConditionDefinition> DrawUnique(List<WeightedCondition> pool, int count)
         {

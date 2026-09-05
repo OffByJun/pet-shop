@@ -24,7 +24,13 @@ namespace _001_Scripts.Data.Economy
             var tier = FindTier(order.Customer.EconomyTierId);
             var requiredFee = CalculateResolvedCare(order.RequiredRequests, tier.RequiredCareUnitPrice);
             var optionalBonus = CalculateResolvedCare(order.OptionalRequests, tier.OptionalCareBonusUnitPrice);
-            var breakdown = new ServicePriceBreakdown(tier.VisitFee, requiredFee, optionalBonus);
+            var perfectBonus = result == ServiceOrderStatus.Perfect ? tier.PerfectBonus : 0;
+            var basePay = tier.VisitFee + requiredFee + optionalBonus + perfectBonus;
+            // Skill and familiarity ride on top of the base fee rather than replacing it.
+            var skillTip = (int)Math.Round(basePay * Math.Max(0f, order.CareQuality - 1f));
+            var regularTip = (int)Math.Round(basePay * order.RelationshipTip);
+            var breakdown = new ServicePriceBreakdown(tier.VisitFee, requiredFee, optionalBonus,
+                perfectBonus, skillTip + regularTip);
             return new ServiceReward
             {
                 Currency = breakdown.Total,

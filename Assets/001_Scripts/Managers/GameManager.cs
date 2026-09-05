@@ -19,6 +19,7 @@ namespace _001_Scripts.Managers
     public sealed class GameManager : ServiceManagerBase<GameManager>, IDayService, IOrderService, IProgressionService
     {
         [SerializeField] private GameSettings settings;
+        [SerializeField] private ShopRoutineSettings routineSettings;
         [SerializeField] private ServiceOrderCatalog orderCatalog;
         [SerializeField] private ProgressionCatalog progressionCatalog;
         [Tooltip("IServiceOrderEconomy를 구현한 경제 컴포넌트 또는 ScriptableObject")]
@@ -55,6 +56,7 @@ namespace _001_Scripts.Managers
 
         protected override void SubscribeGamePipes()
         {
+            EnsureWorld();
             Listen<CreateOrderRequest>(request =>
             {
                 if (request.Reply == null || !request.Reply.TryClaim()) return;
@@ -97,12 +99,41 @@ namespace _001_Scripts.Managers
 
         protected override void OnManagerAwake()
         {
-            world = new WorldContext(new PetWorldSystem());
-            if (orderCatalog != null) generator = new ServiceOrderGenerator(orderCatalog, random, IsContentUnlocked);
+            EnsureWorld();
+            if (orderCatalog != null) generator = new ServiceOrderGenerator(orderCatalog, random, IsContentUnlocked, IsConditionSupported);
             if (economy == null) economy = economyProvider as IServiceOrderEconomy;
         }
 
-        private void Update() => world?.Tick(Time.deltaTime);
+        private void EnsureWorld()
+        {
+            world ??= new WorldContext(new PetWorldSystem());
+        }
+
+        private void Update()
+        {
+            world?.Tick(Time.deltaTime);
+            TickBusiness(Time.deltaTime);
+        }
+
+        public float RemainingBusinessSeconds { get; private set; }
+        public bool IsClosingTime => RemainingBusinessSeconds <= 0f;
+        public ProgressionCatalog ProgressionCatalog => progressionCatalog;
+
+        public void TickBusiness(float seconds)
+        {
+            if (seconds <= 0f || float.IsNaN(seconds) || float.IsInfinity(seconds) ||
+                Status == DayStatus.Closed || Status == DayStatus.EndOfDaySettlement) return;
+            RemainingBusinessSeconds = Mathf.Max(0f, RemainingBusinessSeconds - seconds);
+            if (IsClosingTime && (Status == DayStatus.CustomerArrived || Status == DayStatus.WaitingForClose))
+                BeginDaySettlement();
+        }
+
+        private void BeginDaySettlement()
+        {
+            if (Status == DayStatus.EndOfDaySettlement) return;
+            Status = DayStatus.EndOfDaySettlement;
+            GamePipe.Publish(new DaySettlementStarted(BuildSummary()));
+        }
 
         protected override void OnDisable()
         {
@@ -123,7 +154,10 @@ namespace _001_Scripts.Managers
         public bool CanSellByproducts => Status == DayStatus.EndOfDaySettlement;
         public IReadOnlyList<ServiceOrder> Orders => orders;
 
-        public bool StartBusiness()
+        public bool StartBusiness() => StartBusiness(0);
+
+        /// <summary>extraCustomers는 평판처럼 바깥에서 정해지는 손님 유입 보정입니다.</summary>
+        public bool StartBusiness(int extraCustomers)
         {
             if (startingDay) return false;
             startingDay = true;
@@ -131,10 +165,11 @@ namespace _001_Scripts.Managers
             {
                 if (Status != DayStatus.Closed || !CanCreateOrders) return false;
                 var count = settings == null ? 5 : random.Range(settings.MinimumCustomers, settings.MaximumCustomers + 1);
+                count = Mathf.Max(1, count + extraCustomers);
                 var generatedOrders = new List<ServiceOrder>(count);
                 for (var i = 0; i < count; i++)
                 {
-                    generatedOrders.Add(CreateOrder());
+                    generatedOrders.Add(CreateNext());
                 }
                 orders.Clear();
                 completions.Clear();
@@ -142,6 +177,7 @@ namespace _001_Scripts.Managers
                 CurrentPet = null;
                 currentCustomerIndex = 0;
                 byproductRevenue = 0;
+                RemainingBusinessSeconds = settings == null ? 300f : settings.BusinessDurationSeconds;
                 DayNumber++;
 
                 orders.AddRange(generatedOrders);
@@ -211,11 +247,26 @@ namespace _001_Scripts.Managers
         public bool TryCompleteCurrentService(out ServiceOrderCompletion completion)
         {
             completion = null;
+            if (Status == DayStatus.PetInCare && !TryReturnCurrentPet()) return false;
+            return TryCollectPayment(out completion);
+        }
+
+        public bool TryReturnCurrentPet()
+        {
+            if (Status != DayStatus.PetInCare || CurrentOrder == null || activeToolSession != null) return false;
+            if (CurrentOrder.ResolvedRequiredCount < CurrentOrder.RequiredCount) return false;
+            Status = DayStatus.AwaitingPayment;
+            return true;
+        }
+
+        public bool TryCollectPayment(out ServiceOrderCompletion completion)
+        {
+            completion = null;
             if (settlingCustomer) return false;
             settlingCustomer = true;
             try
             {
-                if (Status != DayStatus.PetInCare || CurrentOrder == null || activeToolSession != null) return false;
+                if (Status != DayStatus.AwaitingPayment || CurrentOrder == null || activeToolSession != null) return false;
                 if (!TryFinalize(CurrentOrder, out completion)) return false;
                 if (!GamePipe.TryCreditCurrency(completion.Reward.Currency)) return false;
                 completions.Add(completion);
@@ -237,17 +288,24 @@ namespace _001_Scripts.Managers
         {
             if (Status != DayStatus.CustomerSettlement) return false;
             currentCustomerIndex++;
-            if (currentCustomerIndex < orders.Count)
+            if (IsClosingTime) BeginDaySettlement();
+            else if (currentCustomerIndex < orders.Count)
             {
                 Status = DayStatus.CustomerArrived;
                 RaiseCustomerArrived();
             }
             else
             {
-                Status = DayStatus.EndOfDaySettlement;
-                GamePipe.Publish(new DaySettlementStarted(BuildSummary()));
+                Status = DayStatus.WaitingForClose;
             }
             return true;
+        }
+
+        public bool SkipCurrentCustomer()
+        {
+            if (Status != DayStatus.CustomerArrived) return false;
+            Status = DayStatus.CustomerSettlement;
+            return ContinueAfterCustomerSettlement();
         }
 
         public bool TrySellByproduct(ItemBase item, int amount, out ItemSaleResult result)
@@ -302,7 +360,9 @@ namespace _001_Scripts.Managers
             if (generator == null)
             {
                 if (orderCatalog == null) throw new InvalidOperationException("ServiceOrderCatalog is not assigned.");
-                generator = new ServiceOrderGenerator(orderCatalog, random, IsContentUnlocked);
+                generator = new ServiceOrderGenerator(orderCatalog, random, IsContentUnlocked, IsConditionSupported,
+                    routineSettings == null ? 3 : routineSettings.MinimumCareRequestsPerVisit,
+                    routineSettings == null ? 5 : routineSettings.MaximumCareRequestsPerVisit);
             }
             var order = generator.CreateOrder(customer);
             GamePipe.Publish(new OrderCreated(order));
@@ -322,8 +382,15 @@ namespace _001_Scripts.Managers
         private bool CanEnterCareRoom(ServiceOrder order)
         {
             for (var i = 0; i < order.Requests.Count; i++)
-                if (Array.IndexOf(supportedActions, order.Requests[i].Condition.ResolvedBy) < 0) return false;
+                if (!IsConditionSupported(order.Requests[i].Condition)) return false;
             return true;
+        }
+
+        private bool IsConditionSupported(PetConditionDefinition condition)
+        {
+            if (routineSettings == null) return Array.IndexOf(supportedActions, condition.ResolvedBy) >= 0;
+            var rule = routineSettings.FindCare(condition);
+            return rule != null && rule.DomainTool != null && rule.DomainTool.CanProcess(condition);
         }
 
         public void Configure(ServiceOrderCatalog definition)
@@ -391,7 +458,7 @@ namespace _001_Scripts.Managers
         }
 
         public bool CanUnlock(ProgressionUnlockDefinition definition)
-            => definition != null &&
+            => Status == DayStatus.Closed && BelongsToCatalog(definition) &&
                !State.IsUnlocked(definition.UnlockId) &&
                HasAllPrerequisites(definition.Prerequisites) &&
                GamePipe.CanPurchase(definition.Quote);

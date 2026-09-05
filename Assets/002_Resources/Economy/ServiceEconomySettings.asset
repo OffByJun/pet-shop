@@ -17,24 +17,30 @@ MonoBehaviour:
     visitFee: 20
     requiredCareUnitPrice: 10
     optionalCareBonusUnitPrice: 7
+    perfectBonus: 0
   tiers:
   - tierId: standard
     visitFee: 20
     requiredCareUnitPrice: 10
     optionalCareBonusUnitPrice: 7
+    perfectBonus: 25
   - tierId: adventurer
     visitFee: 25
     requiredCareUnitPrice: 12
     optionalCareBonusUnitPrice: 8
+    perfectBonus: 32
   - tierId: arcane
     visitFee: 30
     requiredCareUnitPrice: 14
     optionalCareBonusUnitPrice: 10
+    perfectBonus: 40
   - tierId: merchant
     visitFee: 35
     requiredCareUnitPrice: 15
     optionalCareBonusUnitPrice: 12
+    perfectBonus: 40
   - tierId: premium
     visitFee: 50
     requiredCareUnitPrice: 20
     optionalCareBonusUnitPrice: 15
+    perfectBonus: 40

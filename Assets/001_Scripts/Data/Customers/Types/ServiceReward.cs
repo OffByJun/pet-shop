@@ -21,13 +21,20 @@ namespace _001_Scripts.Data.Customers
         public int VisitFee { get; }
         public int RequiredCareFee { get; }
         public int OptionalCareBonus { get; }
-        public int Total => VisitFee + RequiredCareFee + OptionalCareBonus;
+        /// <summary>선택 케어까지 끝낸 완벽 주문 보너스입니다.</summary>
+        public int PerfectBonus { get; }
+        /// <summary>케어 솜씨와 단골 관계로 얹히는 팁입니다.</summary>
+        public int Tip { get; }
+        public int Total => VisitFee + RequiredCareFee + OptionalCareBonus + PerfectBonus + Tip;
 
-        public ServicePriceBreakdown(int visitFee, int requiredCareFee, int optionalCareBonus)
+        public ServicePriceBreakdown(int visitFee, int requiredCareFee, int optionalCareBonus,
+            int perfectBonus = 0, int tip = 0)
         {
             VisitFee = visitFee;
             RequiredCareFee = requiredCareFee;
             OptionalCareBonus = optionalCareBonus;
+            PerfectBonus = perfectBonus;
+            Tip = tip;
         }
     }
 

@@ -20,9 +20,12 @@ namespace _001_Scripts.Managers.Interfaces
         PetInstance CurrentPet { get; }
         PetToolInteractionSession ActiveToolSession { get; }
         bool CanSellByproducts { get; }
+        float RemainingBusinessSeconds { get; }
+        bool IsClosingTime { get; }
         IReadOnlyList<ServiceOrder> Orders { get; }
 
         bool StartBusiness();
+        bool StartBusiness(int extraCustomers);
         bool AcceptCurrentPet(PetInstance pet);
         bool TryApplyCare(PetCareAction action, out PetCareResult result);
         bool TryBeginTool(PetToolDefinition tool, ServiceRequestState request, out PetToolInteractionSession session);
@@ -30,6 +33,9 @@ namespace _001_Scripts.Managers.Interfaces
         bool TryCompleteTool(out PetToolUseResult result);
         void CancelActiveTool();
         bool TryCompleteCurrentService(out ServiceOrderCompletion completion);
+        bool TryReturnCurrentPet();
+        bool TryCollectPayment(out ServiceOrderCompletion completion);
+        bool SkipCurrentCustomer();
         bool ContinueAfterCustomerSettlement();
         bool TrySellByproduct(ItemBase item, int amount, out ItemSaleResult result);
         bool FinishDay(out DaySummary summary);

@@ -10,6 +10,7 @@ namespace _001_Scripts.Data
         public int FailedOrders { get; }
         public int CompletedOrders { get; }
         public int PerfectOrders { get; }
+        public int UnservedOrders => TotalCustomers - FailedOrders - CompletedOrders - PerfectOrders;
         public int ServiceRevenue { get; }
         public int ByproductRevenue { get; }
         public int TotalRevenue => ServiceRevenue + ByproductRevenue;

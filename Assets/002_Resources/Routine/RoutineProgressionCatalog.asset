@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e730b019a9973724ca97c8b5cbcf198f, type: 3}
+  m_Name: RoutineProgressionCatalog
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.Data.Progression.ProgressionCatalog
+  stages: []
+  unlocks:
+  - {fileID: 11400000, guid: 58281bf9b3354674093b5b19d8e9308e, type: 2}
+  - {fileID: 11400000, guid: 95d8a36f33110744c8ac47aa2e56b22c, type: 2}
+  - {fileID: 11400000, guid: df7a576c82169464baf7e2e0c7e1f3f0, type: 2}
+  endingCandidates: []
