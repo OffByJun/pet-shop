@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783d7e6c129416048b5f34be580cc13d, type: 3}
+  m_Name: UITheme
+  m_EditorClassIdentifier: Assembly-CSharp::_001_Scripts.UI.Theme.UITheme
+  displayFont: {fileID: 0}
+  bodyFont: {fileID: 0}
+  osFontFallback: Malgun Gothic
+  ink: {r: 0.1764706, g: 0.25490198, b: 0.23529412, a: 1}
+  inkSoft: {r: 0.3882353, g: 0.4745098, b: 0.43137255, a: 1}
+  inkFaint: {r: 0.5764706, g: 0.6509804, b: 0.6039216, a: 1}
+  inkOnPrimary: {r: 0.1764706, g: 0.25490198, b: 0.23529412, a: 1}
+  paper: {r: 0.9843137, g: 0.9607843, b: 0.90588236, a: 1}
+  paperWarm: {r: 0.99215686, g: 0.972549, b: 0.9254902, a: 0.9607843}
+  memo: {r: 0.9843137, g: 0.9529412, b: 0.87058824, a: 1}
+  oak: {r: 0.7607843, g: 0.57254905, b: 0.36862746, a: 1}
+  sage: {r: 0.72156864, g: 0.84313726, b: 0.7647059, a: 1}
+  sageDeep: {r: 0.49803922, g: 0.6627451, b: 0.5529412, a: 1}
+  blush: {r: 0.8666667, g: 0.5019608, b: 0.4117647, a: 1}
+  gold: {r: 0.8509804, g: 0.6509804, b: 0.2901961, a: 1}
+  shadow: {r: 0.34509805, g: 0.23137255, b: 0.14509805, a: 0.18039216}
+  careWash: {r: 0.35686275, g: 0.6156863, b: 0.7882353, a: 1}
+  careBrush: {r: 0.8784314, g: 0.6745098, b: 0.30980393, a: 1}
+  careTreat: {r: 0.8666667, g: 0.5019608, b: 0.4117647, a: 1}
+  careRemove: {r: 0.5411765, g: 0.4862745, b: 0.72156864, a: 1}
+  careTrim: {r: 0.43529412, g: 0.73333335, b: 0.63529414, a: 1}
+  titleSize: 44
+  headingSize: 26
+  bodySize: 19
+  smallSize: 15
+  microSize: 12
+  card: {fileID: 21300000, guid: 52fa9140c5ec2584a9f24199a492a328, type: 3}
+  capsulePrimary: {fileID: 21300000, guid: 648db61a048e28f4dbe91d3376b47e5d, type: 3}
+  capsuleSoft: {fileID: 21300000, guid: c93342c71899cb94cb7ec020085bd204, type: 3}
+  capsuleSage: {fileID: 21300000, guid: 7cd00fda135be124fa0967039817e5a0, type: 3}
+  capsuleMuted: {fileID: 21300000, guid: 0ee09ad724bf6ed42bac90dffbd1336d, type: 3}
+  chip: {fileID: 21300000, guid: 008b0e048b5252442b73c0628f71ba51, type: 3}
+  circle: {fileID: 21300000, guid: a1c292d7575d25f4faa76ed4c8ce73f2, type: 3}
+  ring: {fileID: 21300000, guid: ab8789f2ae7bdf648bbf1dba93d1ab6a, type: 3}
+  iconWash: {fileID: 21300000, guid: b4d9b9f6a7188694080e2ed6da0f7ad3, type: 3}
+  iconBrush: {fileID: 21300000, guid: e10870baee4ff2e4dbaeb32df0433f7c, type: 3}
+  iconTreat: {fileID: 21300000, guid: 679edb9ed069169488504426cc41c43e, type: 3}
+  iconRemove: {fileID: 21300000, guid: af8e149ac4e0af34087ec9aa4ab6ac7f, type: 3}
+  iconTrim: {fileID: 21300000, guid: dc4633b8543db16418be56796c9b4fc9, type: 3}
+  iconPaw: {fileID: 21300000, guid: 554e2b19b08a132419aa89bc216dd436, type: 3}
+  iconStar: {fileID: 21300000, guid: ef6bb53743fe35146856ad15495c5792, type: 3}
+  iconCheck: {fileID: 21300000, guid: d0d910ce4f1b3f347b3ca472713ed072, type: 3}
